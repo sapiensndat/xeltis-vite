@@ -8,6 +8,11 @@ export default defineConfig({
     strictPort: true,
     hmr: true,
   },
+  preview: {
+    port: 4174,
+    strictPort: true,
+    open: true,
+  },
   base: '/',
   publicDir: 'public',
   resolve: {
@@ -21,7 +26,7 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: true,
     minify: 'esbuild',
-    chunkSizeWarningLimit: 2000, // Increase limit to 2000 kB to suppress the warning
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, 'index.html'),
@@ -30,6 +35,11 @@ export default defineConfig({
         geotrace: path.resolve(__dirname, 'geotrace.html'),
         mozgis: path.resolve(__dirname, 'mozgis.html'),
         drc: path.resolve(__dirname, 'drc.html'),
+        discover: path.resolve(__dirname, 'discover.html'), // Added
+        updates: path.resolve(__dirname, 'updates.html'),  // Added
+        career: path.resolve(__dirname, 'career.html'),    // Added
+        mission: path.resolve(__dirname, 'mission.html'),  // Added
+        launches: path.resolve(__dirname, 'launches.html'), // Added
       },
       output: {
         manualChunks(id) {
