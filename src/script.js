@@ -85,8 +85,15 @@ const initHeader = () => {
 
   if (searchContainer && searchInput && suggestions && searchPlaceholder) {
     const suggestionList = [
-      'NOVA7', 'GEOTRACE', 'MOZGIS', 'DRC', 'Mission', 'Launches',
-      'Career', 'Updates', 'Discover'
+      { name: 'NOVA7', description: 'AI-powered platform for mapping minerals with cosmic precision' },
+      { name: 'GEOTRACE', description: 'Tracks geological wonders across the galaxy' },
+      { name: 'MOZGIS', description: 'Geological intelligence system for Mozambique' },
+      { name: 'DRC', description: 'Sustainable mining project in the Democratic Republic of Congo' },
+      { name: 'Mission', description: 'Unlocking the universe’s resources for humanity’s future' },
+      { name: 'Launches', description: 'Our space missions and launch history' },
+      { name: 'Career', description: 'Join our team and explore career opportunities' },
+      { name: 'Updates', description: 'Latest news and updates from Xeltis' },
+      { name: 'Discover', description: 'Explore our projects and innovations' }
     ];
 
     searchContainer.addEventListener('mouseenter', () => {
@@ -136,13 +143,17 @@ const initHeader = () => {
       if (!value) return;
 
       const filteredSuggestions = suggestionList.filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
+        item.name.toLowerCase().includes(value.toLowerCase())
       );
       filteredSuggestions.forEach(item => {
         const suggestionItem = document.createElement('div');
-        suggestionItem.textContent = item;
+        suggestionItem.className = 'suggestion-item'; // Add a class for styling
+        suggestionItem.innerHTML = `
+          <div class="suggestion-name">${item.name}</div>
+          <div class="suggestion-description">${item.description}</div>
+        `;
         suggestionItem.addEventListener('click', () => {
-          searchInput.value = item;
+          searchInput.value = item.name;
           suggestions.innerHTML = '';
           searchContainer.classList.remove('active');
           gsap.to(suggestions, { opacity: 0, y: -10, duration: 0.3 });
@@ -424,7 +435,7 @@ const initScrollArrow = () => {
   if (!scrollArrow) {
     scrollArrow = document.createElement('div');
     scrollArrow.className = 'scroll-arrow';
-    scrollArrow.innerHTML = `<img src="/public/icons/arrow-down.svg" alt="Scroll Arrow" class="arrow-icon" loading="lazy" onerror="this.src='/public/icons/fallback-arrow.svg'">`;
+    scrollArrow.innerHTML = `<img src="/icons/arrow-down.svg" alt="Scroll Arrow" class="arrow-icon" loading="lazy" onerror="this.src='/icons/fallback-arrow.svg'">`;
     document.body.appendChild(scrollArrow);
   }
 
@@ -437,7 +448,7 @@ const initScrollArrow = () => {
       opacity: 0,
       duration: 0.3,
       onComplete: () => {
-        img.src = direction === 'down' ? '/public/icons/arrow-down.svg' : '/public/icons/arrow-up.svg';
+        img.src = direction === 'down' ? '/icons/arrow-down.svg' : '/icons/arrow-up.svg';
         gsap.to(img, { opacity: 1, duration: 0.3 });
       }
     });
