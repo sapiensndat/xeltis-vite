@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="XELTIS LTD - Terms of Service">
+  <title>Terms | XELTIS LTD</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* Ensure <a> tags inside .projects span don't affect appearance */
+    .projects span a {
+      color: inherit; /* Inherit text color from parent */
+      text-decoration: none; /* Remove default underline */
+    }
+    .projects span a:hover {
+      text-decoration: none; /* Ensure no underline on hover */
+    }
+  </style>
+</head>
+<body class="terms-page">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <a href="/index.html">
+          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+        </a>
+      </div>
+      <div class="projects">
+        <span data-project="nova7"><a href="/nova7.html">NOVA7</a></span>
+        <span data-project="geotrace"><a href="/geotrace.html">GEOTRACE</a></span>
+        <span data-project="mozgis"><a href="/mozgis.html">MOZGIS</a></span>
+        <span data-project="drc"><a href="/drc.html">DRC</a></span>
+      </div>
+      <div class="header-right">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="" aria-label="Search">
+          <span class="search-placeholder">explore</span>
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <div class="suggestions"></div>
+        </div>
+        <button class="discover-btn">DISCOVER</button>
+        <div class="burger-menu">
+          <div class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <nav class="menu">
+            <ul>
+              <li><a href="/mission.html">Mission</a></li>
+              <li><a href="/launches.html">Launches</a></li>
+              <li><a href="/career.html">Career</a></li>
+              <li><a href="/updates.html">Updates</a></li>
+              <li><a href="/discover.html">Discover</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Terms Section -->
+  <section class="terms">
+    <h2>Terms of Service</h2>
+    <p>By using this website, you agree to the following terms and conditions:</p>
+    <ul>
+      <li><strong>Usage Policy:</strong> You agree to use this website only for lawful purposes and in a manner that does not infringe the rights of others.</li>
+      <li><strong>Data Protection:</strong> We collect and process your data in accordance with our Privacy Policy.</li>
+      <li><strong>Liability:</strong> XELTIS is not liable for any damages resulting from the use of this website or its services.</li>
+      <li><strong>Intellectual Property:</strong> All content on this website is the property of XELTIS and may not be reproduced without permission.</li>
+    </ul>
+    <p>These terms are subject to change at any time without notice. Last updated: May 6, 2025.</p>
+  </section>
+
+  <footer class="signup-footer" id="signup">
+    <div class="signup-content">
+      <p>Stay updated with the latest from XELTIS</p>
+      <form class="signup-form" aria-label="Sign Up Form">
+        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="/terms.html">Terms</a>
+      <a href="/ip.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </footer>
+
+  <div class="chatbot">
+    <div class="chatbot-btn">
+      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
+      </svg>
+    </div>
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        <h4>XELTIS Assistant</h4>
+        <button class="chatbot-close">×</button>
+      </div>
+      <div class="chatbot-messages">
+        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Type your message...">
+        <button>Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/script.js"></script>
+</body>
+</html>

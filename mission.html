@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="XELTIS's mission to revolutionize mineral intelligence and trade">
+  <title>Mission | XELTIS LTD</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* Ensure <a> tags inside .projects span don't affect appearance */
+    .projects span a {
+      color: inherit; /* Inherit text color from parent */
+      text-decoration: none; /* Remove default underline */
+    }
+    .projects span a:hover {
+      text-decoration: none; /* Ensure no underline on hover */
+    }
+  </style>
+</head>
+<body class="mission-page">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <a href="/index.html">
+          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+        </a>
+      </div>
+      <div class="projects">
+        <span data-project="nova7"><a href="/nova7.html">NOVA7</a></span>
+        <span data-project="geotrace"><a href="/geotrace.html">GEOTRACE</a></span>
+        <span data-project="mozgis"><a href="/mozgis.html">MOZGIS</a></span>
+        <span data-project="drc"><a href="/drc.html">DRC</a></span>
+      </div>
+      <div class="header-right">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="" aria-label="Search">
+          <span class="search-placeholder">explore</span>
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <div class="suggestions"></div>
+        </div>
+        <button class="discover-btn">DISCOVER</button>
+        <div class="burger-menu">
+          <div class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <nav class="menu">
+            <ul>
+              <li><a href="/mission.html">Mission</a></li>
+              <li><a href="/launches.html">Launches</a></li>
+              <li><a href="/career.html">Career</a></li>
+              <li><a href="/updates.html">Updates</a></li>
+              <li><a href="/discover.html">Discover</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Hero with Quote and Image Background -->
+  <section class="hero">
+    <div class="hero-content">
+      <blockquote>
+        <p>“It’s easy to feel like the world is weighed down—by scarcity, division, and systems that no longer serve us. But what if we could build something greater, not just on Earth, but beyond it? Something that turns resources into renewal, and trade into trust. That’s not science fiction—it’s the next chapter of human courage. And it begins the moment we decide to rise.”</p>
+        <cite>— Sapiens Ndatabaye</cite>
+      </blockquote>
+    </div>
+  </section>
+  <!-- Numbers Section (Animated) -->
+  <section class="numbers">
+    <div class="numbers-grid">
+      <div class="number-item">
+        <span class="counter" data-target="12">0</span>
+        <p>COMPLETED MISSIONS</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="222">0</span>
+        <p>TOTAL DISCOVERIES</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="71">0</span>
+        <p>PARTNERS</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="22000000">0</span>
+        <p>SALES ($M)</p>
+      </div>
+    </div>
+  </section>
+  <!-- Timeline Carousel -->
+  <section class="timeline">
+    <div class="timeline-nav">
+      <div class="timeline-bubble"><button class="year-btn active" data-year="2019">2019</button></div>
+      <div class="timeline-bubble"><button class="year-btn" data-year="2020">2020</button></div>
+      <div class="timeline-bubble"><button class="year-btn" data-year="2021">2021</button></div>
+      <div class="timeline-bubble"><button class="year-btn" data-year="2022">2022</button></div>
+    </div>
+    <div class="timeline-content">
+      <button class="arrow left-arrow">
+        <svg class="arrow-icon" viewBox="0 0 24  Gestalt24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <div class="timeline-slide active" data-year="2019">
+        <img src="/public/images/timeline-2019-image.jpg" alt="Foundation of Vision" loading="lazy">
+        <div class="slide-text">
+          <h3>Foundation of Vision</h3>
+          <p>XELTIS founded by Sapiens Ndatabaye to tackle mineral mismanagement. Began developing Nova7, the AI-powered mineral intelligence platform.</p>
+        </div>
+      </div>
+      <div class="timeline-slide" data-year="2020">
+        <img src="/public/images/timeline-2020-fallback.jpg" alt="First Breakthroughs" loading="lazy">
+        <div class="slide-text">
+          <h3>First Breakthroughs</h3>
+          <p>Completed Shabunda (gold) and Walikale (tin) missions in DRC, saving $450K and supporting 5,000 people with jobs and infrastructure.</p>
+        </div>
+      </div>
+      <div class="timeline-slide" data-year="2021">
+        <img src="/public/images/timeline-2021-fallback.jpg" alt="Scaling Impact" loading="lazy">
+        <div class="slide-text">
+          <h3>Scaling Impact</h3>
+          <p>Katanga (cobalt, lithium) and Katana (copper) missions uncovered $41.5K in minerals, saved $550K, and empowers 5,000 locals.</p>
+        </div>
+      </div>
+      <div class="timeline-slide" data-year="2022">
+        <img src="/public/images/timeline-2022-image.jpg" alt="Global Reach" loading="lazy">
+        <div class="slide-text">
+          <h3>Global Reach</h3>
+          <p>Maniema (rare earths) and South Kivu (coltan) missions generated $465K, supported 7,000 people, and mapped 80+ countries.</p>
+        </div>
+      </div>
+      <button class="arrow right-arrow">
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+  </section>
+  <!-- What Makes Us Successful Section (Values) -->
+  <section class="success-story">
+    <!-- Innovation: Text Left, Video Right -->
+    <div class="story-item">
+      <div class="story-text">
+        <h3>Pioneering the Future with AI</h3>
+        <p>XELTIS redefines mineral intelligence with AI-driven precision, achieving 98% accuracy in mapping resources across 80+ countries. Our Nova7 platform processes satellite data in real-time, uncovering deposits with unparalleled efficiency. In 2022, we mapped $465K in rare earths in Maniema, saving $550K in costs. This innovation drives sustainable mining, reshaping global resource management.</p>
+      </div>
+      <div class="story-media">
+        <video autoplay muted loop playsinline class="story-video">
+          <source src="/public/videos/vision-video.mp4" type="video/mp4">
+          <img src="/public/images/vision-fallback.jpg" alt="Vision Fallback" loading="lazy">
+        </video>
+      </div>
+    </div>
+    <!-- Sustainability: Text Right, Video Left -->
+    <div class="story-item">
+      <div class="story-text story-text-right">
+        <h3>Mining for a Greener Tomorrow</h3>
+        <p>Sustainability is at XELTIS’s core. We champion eco-friendly mining, minimizing environmental impact while maximizing efficiency. Our 2020 DRC project empowered 5,000 locals with sustainable jobs and infrastructure, saving $450K through optimized processes. Using AI and green strategies, we ensure mineral extraction benefits both planet and people, forging a balanced future.</p>
+      </div>
+      <div class="story-media story-media-left">
+        <video autoplay muted loop playsinline class="story-video">
+          <source src="/public/videos/sustainability-video.mp4" type="video/mp4">
+          <img src="/public/images/sustainability-fallback.jpg" alt="Sustainability Fallback" loading="lazy">
+        </video>
+      </div>
+    </div>
+    <!-- Collaboration: Text Left, Video Right -->
+    <div class="story-item">
+      <div class="story-text">
+        <h3>Building Global Bridges</h3>
+        <p>Collaboration fuels XELTIS’s mission, uniting 71 global partners to advance mineral intelligence. In 2022, our South Kivu project with international allies supported 7,000 people and mapped resources across 80+ countries. By fostering trust and transparency, we create networks that empower communities and industries, equitably sharing cosmic resources.</p>
+      </div>
+      <div class="story-media">
+        <video autoplay muted loop playsinline class="story-video">
+          <source src="/public/videos/collaboration-video.mp4" type="video/mp4">
+          <img src="/public/images/collaboration-fallback.jpg" alt="Collaboration Fallback" loading="lazy">
+        </video>
+      </div>
+    </div>
+  </section>
+  <!-- Facilities Section -->
+  <section class="facilities">
+    <h2>XELTIS Facilities</h2>
+    <div class="facilities-container">
+      <div class="ticker-container" id="office-ticker">
+        <div class="ticker-wrapper">
+          <div class="ticker-card" data-index="0">
+            <img src="/public/images/london-office.jpg" alt="London" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+            <div class="office-info">
+              <h3>London</h3>
+              <div class="description">Headquarters driving innovation in mineral intelligence.</div>
+              <div class="address">123 Innovation Street, London, UK</div>
+            </div>
+          </div>
+          <div class="ticker-card" data-index="1">
+            <img src="/public/images/washington-office.jpg" alt="Washington, DC" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+            <div class="office-info">
+              <h3>Washington, DC</h3>
+              <div class="description">Hub for government and international partnerships.</div>
+              <div class="address">456 Partnership Avenue, Washington, DC, USA</div>
+            </div>
+          </div>
+          <div class="ticker-card" data-index="2">
+            <img src="/public/images/ottawa-office.jpg" alt="Ottawa" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+            <div class="office-info">
+              <h3>Ottawa</h3>
+              <div class="description">Center for policy advocacy and space collaboration.</div>
+              <div class="address">789 Policy Road, Ottawa, Canada</div>
+            </div>
+          </div>
+          <div class="ticker-card" data-index="3">
+            <img src="/public/images/sandton-office.jpg" alt="Sandton, Johannesburg" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+            <div class="office-info">
+              <h3>Sandton, Johannesburg</h3>
+              <div class="description">Continental hub uniting science and innovation.</div>
+              <div class="address">101 Science Boulevard, Sandton, Johannesburg, South Africa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="globe-wrapper">
+        <div id="globe-container"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Moving Info Band (Facilities Info) -->
+  <section class="facilities-info-band">
+    <div class="info-band-container" id="facilities-info-band"></div>
+  </section>
+  <!-- Sign Up Footer -->
+  <footer class="signup-footer" id="signup">
+    <div class="signup-content">
+      <p>Stay updated with the latest from XELTIS</p>
+      <form class="signup-form" aria-label="Sign Up Form">
+        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="/terms.html">Terms</a>
+      <a href="/ip.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </footer>
+  <!-- Chatbot -->
+  <div class="chatbot">
+    <div class="chatbot-btn">
+      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
+      </svg>
+    </div>
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        <h4>XELTIS Assistant</h4>
+        <button class="chatbot-close">×</button>
+      </div>
+      <div class="chatbot-messages">
+        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Type your message...">
+        <button>Send</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+.
+├── .DS_Store
+├── .gitignore
+├── index.html
+├── ip.html
+├── mission.html
+├── package-lock.json
+├── package.json
+├── public
+│   ├── .DS_Store
+│   ├── data
+│   │   └── offices.json
+│   ├── images
+│   │   ├── .DS_Store
+│   │   ├── MRG-3Apr24.png
+│   │   ├── drc-fallback.jpg
+│   │   ├── drc-project-image.jpg
+│   │   ├── geotrace-fallback.jpg
+│   │   ├── hero-fallback.jpg
+│   │   ├── london-office.jpg
+│   │   ├── mining-space.jpg
+│   │   ├── mining-space3.jpg
+│   │   ├── mining-space5.jpg
+│   │   ├── mozgis-fallback.jpg
+│   │   ├── offices-background.jpg
+│   │   ├── ottawa-office.jpg
+│   │   ├── sandton-office.jpg
+│   │   ├── shop-image.jpg
+│   │   ├── starry-sky.jpg
+│   │   ├── timeline-2019-image.jpg
+│   │   ├── timeline-2020-fallback.jpg
+│   │   ├── timeline-2021-fallback.jpg
+│   │   ├── timeline-2022-image.jpg
+│   │   ├── timeline-2023-2025-image.jpg
+│   │   ├── updates-image.jpg
+│   │   ├── video1-placeholder.jpg
+│   │   ├── video2-placeholder.jpg
+│   │   ├── video3-placeholder.jpg
+│   │   ├── vision-fallback.jpg
+│   │   ├── washington-office.jpg
+│   │   └── xeltis-logo.png
+│   ├── videos
+│   │   ├── .DS_Store
+│   │   ├── Launch.mp4
+│   │   ├── drc-video.mp4
+│   │   ├── geotrace-video.mp4
+│   │   ├── hero-video.mp4
+│   │   ├── if.mp4
+│   │   ├── mozgis-video.mp4
+│   │   ├── timeline-2020-video.mp4
+│   │   ├── timeline-2021-video.mp4
+│   │   └── vision-video.mp4
+│   └── vite.svg
+├── src
+│   ├── .DS_Store
+│   ├── counter.js
+│   ├── javascript.svg
+│   ├── main.js
+│   ├── script.js
+│   └── style.css
+├── structure.txt
+└── xeltis-vite
+    └── src
+        └── style.css
+
+8 directories, 56 files

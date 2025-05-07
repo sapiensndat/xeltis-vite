@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="XELTIS LTD - NOVA7 Project Details">
+  <title>NOVA7 | XELTIS LTD</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <style>
+    /* Local styles for PDF viewer to ensure book-like display */
+    #pdf-viewer {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      background: #111111;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #pdf-viewer .pdf-page {
+      display: inline-block;
+      margin: 0 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .pdf-controls {
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body class="nova7-page">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <a href="/index.html">
+          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+        </a>
+      </div>
+      <div class="projects">
+        <span data-project="nova7"><a href="/nova7.html">NOVA7</a></span>
+        <span data-project="geotrace"><a href="/geotrace.html">GEOTRACE</a></span>
+        <span data-project="mozgis"><a href="/mozgis.html">MOZGIS</a></span>
+        <span data-project="drc"><a href="/drc.html">DRC</a></span>
+      </div>
+      <div class="header-right">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="" aria-label="Search">
+          <span class="search-placeholder">explore</span>
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <div class="suggestions"></div>
+        </div>
+        <button class="discover-btn">DISCOVER</button>
+        <div class="burger-menu">
+          <div class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <nav class="menu">
+            <ul>
+              <li><a href="/mission.html">Mission</a></li>
+              <li><a href="/launches.html">Launches</a></li>
+              <li><a href="/career.html">Career</a></li>
+              <li><a href="/updates.html">Updates</a></li>
+              <li><a href="/discover.html">Discover</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-question">NOVA7: Pioneering AI-Driven Mineral Intelligence</h1>
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="/public/videos/hero-video.mp4" type="video/mp4">
+        <img src="/public/images/hero-fallback.jpg" alt="Hero Fallback" loading="lazy">
+      </video>
+    </div>
+  </section>
+
+  <!-- Numbers Section -->
+  <section class="numbers">
+    <div class="numbers-grid">
+      <div class="number-item">
+        <span class="counter" data-target="15">0</span>
+        <p>AI MODELS DEPLOYED</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="300">0</span>
+        <p>MINERAL SITES MAPPED</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="80">0</span>
+        <p>COUNTRIES COVERED</p>
+      </div>
+      <div class="number-item">
+        <span class="counter" data-target="25000000">0</span>
+        <p>VALUE DISCOVERED ($M)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF Viewer Section -->
+  <section class="pdf-section">
+    <h2>NOVA7 Project Report</h2>
+    <div id="pdf-viewer" data-pdf="/public/pdfs/nova7.pdf"></div>
+    <div class="pdf-controls">
+      <button id="prev-page">Previous</button>
+      <span>Page <span id="page-num">1</span> of <span id="page-count">1</span></span>
+      <button id="next-page">Next</button>
+      <button id="zoom-in">Zoom In</button>
+      <button id="zoom-out">Zoom Out</button>
+    </div>
+    <div class="pdf-download">
+      <a href="/public/pdfs/nova7.pdf" download>Download Report</a>
+    </div>
+  </section>
+
+  <!-- Success Story Section (Text Only) -->
+  <section class="success-story project-success">
+    <div class="story-text">
+      <h3>NOVA7: Redefining Mineral Intelligence</h3>
+      <p>
+        NOVA7 represents a groundbreaking leap in the field of mineral intelligence, harnessing the power of artificial intelligence to revolutionize how we explore, map, and extract resources from both terrestrial and extraterrestrial environments. Developed by XELTIS LTD, NOVA7 is an advanced platform designed to address the inefficiencies and environmental challenges associated with traditional mining practices. By integrating cutting-edge AI algorithms, satellite imagery, and real-time data processing, NOVA7 achieves an unprecedented 98% accuracy in identifying mineral deposits across more than 80 countries, setting a new standard for sustainable resource management.
+      </p>
+      <p>
+        Launched in 2019, the NOVA7 project began as a visionary initiative to tackle mineral mismanagement on a global scale. Its primary objective was to create a system capable of mapping resources with unparalleled precision while minimizing environmental impact. Over the years, NOVA7 has evolved into a cornerstone of XELTIS's mission, enabling the company to uncover deposits worth millions while saving significant costs through optimized processes. For instance, in 2022, NOVA7 mapped rare earth elements in Maniema, DRC, identifying resources valued at $465K and saving $550K in operational expenses.
+      </p>
+      <p>
+        What sets NOVA7 apart is its ability to process vast amounts of satellite data in real-time, providing actionable insights for mining operations. The platform uses machine learning models to analyze geological patterns, predict mineral locations, and assess environmental risks, ensuring that extraction processes are both efficient and eco-friendly. Beyond Earth, NOVA7 is being adapted for extraterrestrial exploration, with plans to map lunar and Martian resources for future mining missions. This forward-thinking approach positions NOVA7 as a key player in the emerging field of space resource extraction.
+      </p>
+      <p>
+        NOVA7 also fosters global collaboration by sharing its data with 71 international partners, promoting transparency and equitable resource distribution. By empowering local communities with sustainable jobs and infrastructure, as seen in the 2020 DRC project that supported 5,000 people, NOVA7 demonstrates a commitment to social responsibility alongside technological innovation. As XELTIS continues to expand its cosmic ambitions, NOVA7 remains at the forefront, driving the future of mineral intelligence with a focus on sustainability, efficiency, and global impact.
+      </p>
+    </div>
+  </section>
+
+  <!-- Project Manager Section -->
+  <section class="project-manager">
+    <div class="manager-info">
+      <img src="/public/images/manager-nova7.jpg" alt="Project Manager" loading="lazy" onerror="this.src='/public/images/fallback-manager.jpg'">
+      <h3>Dr. Emily Carter</h3>
+      <p>Lead Project Manager, NOVA7</p>
+    </div>
+  </section>
+
+  <footer class="signup-footer" id="signup">
+    <div class="signup-content">
+      <p>Stay updated with the latest from XELTIS</p>
+      <form class="signup-form" aria-label="Sign Up Form">
+        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="/terms.html">Terms</a>
+      <a href="/ip.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </footer>
+
+  <div class="chatbot">
+    <div class="chatbot-btn">
+      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
+      </svg>
+    </div>
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        <h4>XELTIS Assistant</h4>
+        <button class="chatbot-close">×</button>
+      </div>
+      <div class="chatbot-messages">
+        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Type your message...">
+        <button>Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/script.js"></script>
+  <script>
+    // Chatbot toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const chatbotBtn = document.querySelector('.chatbot-btn');
+      const chatbotWindow = document.querySelector('.chatbot-window');
+      const chatbotClose = document.querySelector('.chatbot-close');
+
+      chatbotBtn.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('active');
+        chatbotBtn.classList.toggle('active');
+      });
+
+      chatbotClose.addEventListener('click', () => {
+        chatbotWindow.classList.remove('active');
+        chatbotBtn.classList.remove('active');
+      });
+    });
+
+    // PDF Viewer functionality (Issuu-style book viewer)
+    document.addEventListener('DOMContentLoaded', () => {
+      const pdfViewer = document.getElementById('pdf-viewer');
+      const prevPageBtn = document.getElementById('prev-page');
+      const nextPageBtn = document.getElementById('next-page');
+      const pageNumSpan = document.getElementById('page-num');
+      const pageCountSpan = document.getElementById('page-count');
+      const zoomInBtn = document.getElementById('zoom-in');
+      const zoomOutBtn = document.getElementById('zoom-out');
+
+      let pdfDoc = null;
+      let pageNum = 1;
+      let pageRendering = false;
+      let pageNumPending = null;
+      let scale = 1.0;
+      const scaleStep = 0.2;
+
+      pdfjsLib.getDocument(pdfViewer.getAttribute('data-pdf')).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        pageCountSpan.textContent = pdfDoc.numPages;
+        renderPages(pageNum);
+      }).catch(error => {
+        console.error('Error loading PDF:', error);
+        pdfViewer.innerHTML = '<p style="color: red; text-align: center;">Failed to load PDF. Please try again later.</p>';
+      });
+
+      function renderPages(num) {
+        if (pageRendering) return;
+        pageRendering = true;
+
+        // Clear previous pages
+        pdfViewer.innerHTML = '';
+
+        // Calculate pages to display (show 2 pages side by side if possible)
+        const pagesToShow = num === pdfDoc.numPages && num % 2 !== 0 ? 1 : 2;
+        const startPage = num % 2 === 0 ? num - 1 : num;
+        const promises = [];
+
+        for (let i = 0; i < pagesToShow; i++) {
+          const pageNumber = startPage + i;
+          if (pageNumber > pdfDoc.numPages) break;
+
+          promises.push(pdfDoc.getPage(pageNumber).then(page => {
+            const canvas = document.createElement('canvas');
+            canvas.className = 'pdf-page';
+            const ctx = canvas.getContext('2d');
+            const viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+              canvasContext: ctx,
+              viewport: viewport
+            };
+            return page.render(renderContext).promise.then(() => canvas);
+          }));
+        }
+
+        Promise.all(promises).then(canvases => {
+          canvases.forEach(canvas => pdfViewer.appendChild(canvas));
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPages(pageNumPending);
+            pageNumPending = null;
+          }
+        }).catch(error => {
+          console.error('Error rendering pages:', error);
+          pageRendering = false;
+        });
+
+        pageNumSpan.textContent = num;
+      }
+
+      function queueRenderPage(num) {
+        if (pageRendering) {
+          pageNumPending = num;
+        } else {
+          renderPages(num);
+        }
+      }
+
+      prevPageBtn.addEventListener('click', () => {
+        if (pageNum <= 1) return;
+        pageNum -= 2;
+        if (pageNum < 1) pageNum = 1;
+        queueRenderPage(pageNum);
+      });
+
+      nextPageBtn.addEventListener('click', () => {
+        if (pageNum >= pdfDoc.numPages) return;
+        pageNum += 2;
+        if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages;
+        queueRenderPage(pageNum);
+      });
+
+      zoomInBtn.addEventListener('click', () => {
+        scale += scaleStep;
+        queueRenderPage(pageNum);
+      });
+
+      zoomOutBtn.addEventListener('click', () => {
+        if (scale <= scaleStep) return;
+        scale -= scaleStep;
+        queueRenderPage(pageNum);
+      });
+    });
+  </script>
+</body>
+</html>
