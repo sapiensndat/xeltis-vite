@@ -13,7 +13,8 @@ export default defineConfig({
     strictPort: true,
     open: true,
   },
-  base: './',
+  // No base or set to '/', which works well on Netlify
+  base: '/',
   publicDir: 'public',
   resolve: {
     alias: {
@@ -35,22 +36,19 @@ export default defineConfig({
         geotrace: path.resolve(__dirname, 'geotrace.html'),
         mozgis: path.resolve(__dirname, 'mozgis.html'),
         drc: path.resolve(__dirname, 'drc.html'),
-        discover: path.resolve(__dirname, 'discover.html'), // Added
-        updates: path.resolve(__dirname, 'updates.html'),  // Added
-        career: path.resolve(__dirname, 'career.html'),    // Added
-        mission: path.resolve(__dirname, 'mission.html'),  // Added
-        launches: path.resolve(__dirname, 'launches.html'), // Added
+        discover: path.resolve(__dirname, 'discover.html'),
+        updates: path.resolve(__dirname, 'updates.html'),
+        career: path.resolve(__dirname, 'career.html'),
+        mission: path.resolve(__dirname, 'mission.html'),
+        launches: path.resolve(__dirname, 'launches.html'),
       },
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
+          if (id.includes('node_modules')) return 'vendor';
         },
       },
     },
     copyPublicDir: true,
-    additionalEntries: ['_redirects'],
   },
   optimizeDeps: {
     include: ['gsap', 'globe.gl'],
