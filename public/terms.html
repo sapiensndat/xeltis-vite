@@ -3,24 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="XELTIS LTD - Marketplace for rare minerals and resources">
-  <title>Discover | XELTIS LTD</title>
-  
-  <!-- Corrected path for style.css -->
+  <meta name="description" content="XELTIS LTD - Terms of Service">
+  <title>Terms | XELTIS LTD</title>
   <link rel="stylesheet" href="/src/style.css">
-  
-  <!-- Google Fonts for typography -->
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  
-  <!-- CDN for GSAP to fix the module error -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-  
-  <!-- CDN for ScrollTrigger, an important GSAP plugin -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
-  
-  <!-- CDN for PDF.js to fix the reference error on pages where it is used -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-
   <style>
     /* Ensure <a> tags inside .projects span don't affect appearance */
     .projects span a {
@@ -32,18 +18,15 @@
     }
   </style>
 </head>
-<body class="discover-page">
+<body class="terms-page">
   <header class="header">
     <div class="header-content">
       <div class="logo">
-        <!-- Corrected path for index.html -->
         <a href="/index.html">
-          <!-- Restored the original local image path -->
-          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+          <img src="/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         </a>
       </div>
       <div class="projects">
-        <!-- Corrected paths for other html pages -->
         <span data-project="nova7"><a href="/nova7.html">NOVA7</a></span>
         <span data-project="geotrace"><a href="/geotrace.html">GEOTRACE</a></span>
         <span data-project="mozgis"><a href="/mozgis.html">MOZGIS</a></span>
@@ -67,7 +50,6 @@
             <span></span>
           </div>
           <nav class="menu">
-            <!-- Corrected paths for other html pages -->
             <ul>
               <li><a href="/mission.html">Mission</a></li>
               <li><a href="/launches.html">Launches</a></li>
@@ -81,44 +63,17 @@
     </div>
   </header>
 
-  <section class="discover">
-    <div class="discover-header">
-      <h2>Explore Rare Cosmic Resources</h2>
-      <div class="discover-search">
-        <input type="text" placeholder="Search for minerals..." aria-label="Search Products">
-      </div>
-    </div>
-    <div class="products-grid">
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/lunar-rock.jpg" alt="Lunar Rock" loading="lazy">
-        <h3>Lunar Regolith Sample</h3>
-        <div class="price">$5,000</div>
-        <p>Origin: Lunar Highlands, collected during 2024 mission. Ideal for research or display.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
-      </div>
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/martian-soil.jpg" alt="Martian Soil" loading="lazy">
-        <h3>Martian Soil Sample</h3>
-        <div class="price">$7,500</div>
-        <p>Origin: Valles Marineris, Mars. Rich in iron oxides, perfect for scientific study.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
-      </div>
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/asteroid-ore.jpg" alt="Asteroid Ore" loading="lazy">
-        <h3>Asteroid Platinum Ore</h3>
-        <div class="price">$10,000</div>
-        <p>Origin: Near-Earth Asteroid 2023-XL. High purity platinum for industrial use.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
-      </div>
-    </div>
-    <div class="sell-section">
-      <h2>Sell Your Cosmic Finds</h2>
-      <p>Have rare minerals or resources to sell? Create an account to list your items on our marketplace.</p>
-      <a href="https://app.xeltis.org/register.html" class="btn" target="_blank" rel="noopener noreferrer">Sign Up to Sell</a>
-    </div>
+  <!-- Terms Section -->
+  <section class="terms">
+    <h2>Terms of Service</h2>
+    <p>By using this website, you agree to the following terms and conditions:</p>
+    <ul>
+      <li><strong>Usage Policy:</strong> You agree to use this website only for lawful purposes and in a manner that does not infringe the rights of others.</li>
+      <li><strong>Data Protection:</strong> We collect and process your data in accordance with our Privacy Policy.</li>
+      <li><strong>Liability:</strong> XELTIS is not liable for any damages resulting from the use of this website or its services.</li>
+      <li><strong>Intellectual Property:</strong> All content on this website is the property of XELTIS and may not be reproduced without permission.</li>
+    </ul>
+    <p>These terms are subject to change at any time without notice. Last updated: May 6, 2025.</p>
   </section>
 
   <footer class="signup-footer" id="signup">
@@ -159,6 +114,6 @@
     </div>
   </div>
 
-  <script src="/src/script.js"></script>
+  <script type="module" src="/src/script.js"></script>
 </body>
 </html>

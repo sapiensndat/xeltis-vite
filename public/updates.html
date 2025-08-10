@@ -3,24 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="XELTIS LTD - Marketplace for rare minerals and resources">
-  <title>Discover | XELTIS LTD</title>
-  
-  <!-- Corrected path for style.css -->
+  <meta name="description" content="XELTIS LTD - Latest updates and news">
+  <title>Updates | XELTIS LTD</title>
   <link rel="stylesheet" href="/src/style.css">
-  
-  <!-- Google Fonts for typography -->
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  
-  <!-- CDN for GSAP to fix the module error -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-  
-  <!-- CDN for ScrollTrigger, an important GSAP plugin -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
-  
-  <!-- CDN for PDF.js to fix the reference error on pages where it is used -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-
   <style>
     /* Ensure <a> tags inside .projects span don't affect appearance */
     .projects span a {
@@ -32,18 +18,15 @@
     }
   </style>
 </head>
-<body class="discover-page">
+<body class="updates-page">
   <header class="header">
     <div class="header-content">
       <div class="logo">
-        <!-- Corrected path for index.html -->
         <a href="/index.html">
-          <!-- Restored the original local image path -->
-          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
+          <img src="/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         </a>
       </div>
       <div class="projects">
-        <!-- Corrected paths for other html pages -->
         <span data-project="nova7"><a href="/nova7.html">NOVA7</a></span>
         <span data-project="geotrace"><a href="/geotrace.html">GEOTRACE</a></span>
         <span data-project="mozgis"><a href="/mozgis.html">MOZGIS</a></span>
@@ -67,7 +50,6 @@
             <span></span>
           </div>
           <nav class="menu">
-            <!-- Corrected paths for other html pages -->
             <ul>
               <li><a href="/mission.html">Mission</a></li>
               <li><a href="/launches.html">Launches</a></li>
@@ -81,43 +63,44 @@
     </div>
   </header>
 
-  <section class="discover">
-    <div class="discover-header">
-      <h2>Explore Rare Cosmic Resources</h2>
-      <div class="discover-search">
-        <input type="text" placeholder="Search for minerals..." aria-label="Search Products">
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-question">Stay Informed with XELTIS Updates</h1>
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="/videos/hero-video.mp4" type="video/mp4">
+        <img src="/images/hero-fallback.jpg" alt="Hero Fallback" loading="lazy">
+      </video>
     </div>
-    <div class="products-grid">
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/lunar-rock.jpg" alt="Lunar Rock" loading="lazy">
-        <h3>Lunar Regolith Sample</h3>
-        <div class="price">$5,000</div>
-        <p>Origin: Lunar Highlands, collected during 2024 mission. Ideal for research or display.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
+  </section>
+
+  <!-- Updates Section -->
+  <section class="updates">
+    <div class="updates-list">
+      <div class="update-item">
+        <img src="/images/update1.jpg" alt="Update 1" loading="lazy">
+        <div class="update-text">
+          <h3>New Partnership in South Kivu</h3>
+          <p>Announcing our latest collaboration with local partners to support sustainable mining initiatives in South Kivu.</p>
+          <div class="update-meta">Posted on May 1, 2025 at 10:00 AM by XELTIS Team</div>
+        </div>
       </div>
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/martian-soil.jpg" alt="Martian Soil" loading="lazy">
-        <h3>Martian Soil Sample</h3>
-        <div class="price">$7,500</div>
-        <p>Origin: Valles Marineris, Mars. Rich in iron oxides, perfect for scientific study.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
+      <div class="update-item">
+        <img src="/images/update2.jpg" alt="Update 2" loading="lazy">
+        <div class="update-text">
+          <h3>NOVA7 Update 2025</h3>
+          <p>Enhanced features for our AI-powered mineral mapping platform, improving accuracy to 99%.</p>
+          <div class="update-meta">Posted on April 15, 2025 at 2:00 PM by Tech Division</div>
+        </div>
       </div>
-      <div class="product-item">
-        <!-- Restored the original local image path -->
-        <img src="/public/images/asteroid-ore.jpg" alt="Asteroid Ore" loading="lazy">
-        <h3>Asteroid Platinum Ore</h3>
-        <div class="price">$10,000</div>
-        <p>Origin: Near-Earth Asteroid 2023-XL. High purity platinum for industrial use.</p>
-        <a href="/contact.html" class="btn">Buy Now</a>
+      <div class="update-item">
+        <img src="/images/update3.jpg" alt="Update 3" loading="lazy">
+        <div class="update-text">
+          <h3>Successful Lunar Mapping Mission</h3>
+          <p>Our team successfully mapped lunar resources, identifying new deposits for future extraction.</p>
+          <div class="update-meta">Posted on March 20, 2025 at 9:00 AM by Exploration Team</div>
+        </div>
       </div>
-    </div>
-    <div class="sell-section">
-      <h2>Sell Your Cosmic Finds</h2>
-      <p>Have rare minerals or resources to sell? Create an account to list your items on our marketplace.</p>
-      <a href="https://app.xeltis.org/register.html" class="btn" target="_blank" rel="noopener noreferrer">Sign Up to Sell</a>
     </div>
   </section>
 
@@ -159,6 +142,6 @@
     </div>
   </div>
 
-  <script src="/src/script.js"></script>
+  <script type="module" src="/src/script.js"></script>
 </body>
 </html>

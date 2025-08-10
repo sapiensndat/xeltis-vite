@@ -7,12 +7,16 @@
   <title>NOVA7 | XELTIS LTD</title>
   <link rel="stylesheet" href="/src/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  
+  <!-- Corrected PDF.js CDN URL to be consistent and avoid potential issues -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
   <style>
     /* Local styles for PDF viewer to ensure book-like display */
     #pdf-viewer {
       position: relative;
       width: 100%;
+      max-width: 900px; /* Added max-width for better desktop view */
       height: 600px;
       overflow: hidden;
       background: #111111;
@@ -20,12 +24,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0 auto; /* Center the viewer */
+      flex-wrap: wrap; /* Allow pages to wrap on smaller screens */
     }
 
     #pdf-viewer .pdf-page {
       display: inline-block;
       margin: 0 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      max-width: 100%; /* Ensure pages are responsive */
+      height: auto;
     }
 
     .pdf-controls {
@@ -33,6 +41,7 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
+      flex-wrap: wrap; /* Allow controls to wrap */
     }
   </style>
 </head>
@@ -41,7 +50,8 @@
     <div class="header-content">
       <div class="logo">
         <a href="/index.html">
-          <img src="/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+          <!-- Corrected image path -->
+          <img src="/public/images/xeltis-logo.png" alt="XELTIS Logo" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
         </a>
       </div>
       <div class="projects">
@@ -86,8 +96,10 @@
     <div class="hero-content">
       <h1 class="hero-question">NOVA7: Pioneering AI-Driven Mineral Intelligence</h1>
       <video class="hero-video" autoplay muted loop playsinline>
-        <source src="/videos/hero-video.mp4" type="video/mp4">
-        <img src="/images/hero-fallback.jpg" alt="Hero Fallback" loading="lazy">
+        <!-- Corrected video path -->
+        <source src="/public/videos/hero-video.mp4" type="video/mp4">
+        <!-- Corrected fallback image path -->
+        <img src="/public/images/hero-fallback.jpg" alt="Hero Fallback" loading="lazy" onerror="this.src='/public/images/fallback-office.jpg'">
       </video>
     </div>
   </section>
@@ -117,7 +129,8 @@
   <!-- PDF Viewer Section -->
   <section class="pdf-section">
     <h2>NOVA7 Project Report</h2>
-    <div id="pdf-viewer" data-pdf="/pdfs/nova7.pdf"></div>
+    <!-- Corrected PDF path -->
+    <div id="pdf-viewer" data-pdf="/public/pdfs/nova7.pdf"></div>
     <div class="pdf-controls">
       <button id="prev-page">Previous</button>
       <span>Page <span id="page-num">1</span> of <span id="page-count">1</span></span>
@@ -126,7 +139,8 @@
       <button id="zoom-out">Zoom Out</button>
     </div>
     <div class="pdf-download">
-      <a href="/pdfs/nova7.pdf" download>Download Report</a>
+      <!-- Corrected PDF path for download link -->
+      <a href="/public/pdfs/nova7.pdf" download>Download Report</a>
     </div>
   </section>
 
@@ -152,7 +166,8 @@
   <!-- Project Manager Section -->
   <section class="project-manager">
     <div class="manager-info">
-      <img src="/images/manager-nova7.jpg" alt="Project Manager" loading="lazy" onerror="this.src='/images/fallback-manager.jpg'">
+      <!-- Corrected image path -->
+      <img src="/public/images/manager-nova7.jpg" alt="Project Manager" loading="lazy" onerror="this.src='/public/images/fallback-manager.jpg'">
       <h3>Dr. Emily Carter</h3>
       <p>Lead Project Manager, NOVA7</p>
     </div>
@@ -196,26 +211,65 @@
     </div>
   </div>
 
-  <script type="module" src="/src/script.js"></script>
   <script>
+    // All JavaScript is now embedded to prevent module-related errors.
+    
+    // Counter animation for the numbers section
+    const counters = document.querySelectorAll('.counter');
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          let count = 0;
+          const increment = target / 200;
+
+          const updateCounter = () => {
+            count += increment;
+            if (count < target) {
+              counter.textContent = Math.ceil(count).toLocaleString();
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = target.toLocaleString();
+            }
+          };
+
+          updateCounter();
+          observer.unobserve(counter);
+        }
+      });
+    }, options);
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+
     // Chatbot toggle functionality
     document.addEventListener('DOMContentLoaded', () => {
       const chatbotBtn = document.querySelector('.chatbot-btn');
       const chatbotWindow = document.querySelector('.chatbot-window');
       const chatbotClose = document.querySelector('.chatbot-close');
 
-      chatbotBtn.addEventListener('click', () => {
-        chatbotWindow.classList.toggle('active');
-        chatbotBtn.classList.toggle('active');
-      });
+      if (chatbotBtn && chatbotWindow && chatbotClose) {
+        chatbotBtn.addEventListener('click', () => {
+          chatbotWindow.classList.toggle('active');
+          chatbotBtn.classList.toggle('active');
+        });
 
-      chatbotClose.addEventListener('click', () => {
-        chatbotWindow.classList.remove('active');
-        chatbotBtn.classList.remove('active');
-      });
+        chatbotClose.addEventListener('click', () => {
+          chatbotWindow.classList.remove('active');
+          chatbotBtn.classList.remove('active');
+        });
+      }
     });
 
-    // PDF Viewer functionality (Issuu-style book viewer)
+    // PDF Viewer functionality
     document.addEventListener('DOMContentLoaded', () => {
       const pdfViewer = document.getElementById('pdf-viewer');
       const prevPageBtn = document.getElementById('prev-page');
@@ -232,14 +286,17 @@
       let scale = 1.0;
       const scaleStep = 0.2;
 
-      pdfjsLib.getDocument(pdfViewer.getAttribute('data-pdf')).promise.then(pdfDoc_ => {
-        pdfDoc = pdfDoc_;
-        pageCountSpan.textContent = pdfDoc.numPages;
-        renderPages(pageNum);
-      }).catch(error => {
-        console.error('Error loading PDF:', error);
-        pdfViewer.innerHTML = '<p style="color: red; text-align: center;">Failed to load PDF. Please try again later.</p>';
-      });
+      // Ensure PDF.js is loaded before attempting to use it
+      if (typeof pdfjsLib !== 'undefined' && pdfViewer) {
+        pdfjsLib.getDocument(pdfViewer.getAttribute('data-pdf')).promise.then(pdfDoc_ => {
+          pdfDoc = pdfDoc_;
+          pageCountSpan.textContent = pdfDoc.numPages;
+          renderPages(pageNum);
+        }).catch(error => {
+          console.error('Error loading PDF:', error);
+          pdfViewer.innerHTML = '<p style="color: red; text-align: center;">Failed to load PDF. Please try again later.</p>';
+        });
+      }
 
       function renderPages(num) {
         if (pageRendering) return;
@@ -249,8 +306,8 @@
         pdfViewer.innerHTML = '';
 
         // Calculate pages to display (show 2 pages side by side if possible)
-        const pagesToShow = num === pdfDoc.numPages && num % 2 !== 0 ? 1 : 2;
-        const startPage = num % 2 === 0 ? num - 1 : num;
+        const pagesToShow = pdfDoc.numPages - num + 1 > 1 ? 2 : 1;
+        const startPage = num;
         const promises = [];
 
         for (let i = 0; i < pagesToShow; i++) {
@@ -261,7 +318,9 @@
             const canvas = document.createElement('canvas');
             canvas.className = 'pdf-page';
             const ctx = canvas.getContext('2d');
-            const viewport = page.getViewport({ scale: scale });
+            const viewport = page.getViewport({
+              scale: scale
+            });
             canvas.height = viewport.height;
             canvas.width = viewport.width;
 
@@ -295,32 +354,129 @@
           renderPages(num);
         }
       }
+      
+      if(prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => {
+          if (pageNum <= 1) return;
+          pageNum -= 2;
+          if (pageNum < 1) pageNum = 1;
+          queueRenderPage(pageNum);
+        });
+      }
 
-      prevPageBtn.addEventListener('click', () => {
-        if (pageNum <= 1) return;
-        pageNum -= 2;
-        if (pageNum < 1) pageNum = 1;
-        queueRenderPage(pageNum);
-      });
+      if(nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => {
+          if (pageNum >= pdfDoc.numPages) return;
+          pageNum += 2;
+          if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages - (pdfDoc.numPages % 2 === 0 ? 1 : 0);
+          if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages;
+          queueRenderPage(pageNum);
+        });
+      }
 
-      nextPageBtn.addEventListener('click', () => {
-        if (pageNum >= pdfDoc.numPages) return;
-        pageNum += 2;
-        if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages;
-        queueRenderPage(pageNum);
-      });
+      if(zoomInBtn) {
+        zoomInBtn.addEventListener('click', () => {
+          scale += scaleStep;
+          queueRenderPage(pageNum);
+        });
+      }
 
-      zoomInBtn.addEventListener('click', () => {
-        scale += scaleStep;
-        queueRenderPage(pageNum);
-      });
-
-      zoomOutBtn.addEventListener('click', () => {
-        if (scale <= scaleStep) return;
-        scale -= scaleStep;
-        queueRenderPage(pageNum);
-      });
+      if(zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', () => {
+          if (scale <= scaleStep) return;
+          scale -= scaleStep;
+          queueRenderPage(pageNum);
+        });
+      }
     });
+
+    // Burger Menu Functionality
+    const burgerIcon = document.querySelector('.burger-icon');
+    const menu = document.querySelector('.menu');
+    const discoverBtn = document.querySelector('.discover-btn');
+
+    if (burgerIcon && menu && discoverBtn) {
+      burgerIcon.addEventListener('click', () => {
+        burgerIcon.classList.toggle('open');
+        menu.classList.toggle('open');
+        discoverBtn.style.display = menu.classList.contains('open') ? 'none' : 'block';
+      });
+
+      const menuLinks = document.querySelectorAll('.menu a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          burgerIcon.classList.remove('open');
+          menu.classList.remove('open');
+          discoverBtn.style.display = 'block';
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !burgerIcon.contains(event.target)) {
+          if (menu.classList.contains('open')) {
+            burgerIcon.classList.remove('open');
+            menu.classList.remove('open');
+            discoverBtn.style.display = 'block';
+          }
+        }
+      });
+    }
+
+    // Search Functionality
+    const searchContainer = document.querySelector('.search-container');
+    const searchInput = document.querySelector('.search-input');
+    const searchPlaceholder = document.querySelector('.search-placeholder');
+    const searchIcon = document.querySelector('.search-icon');
+    const suggestionsBox = document.querySelector('.suggestions');
+
+    const searchData = [
+      { name: 'lunar rock', url: '/discover.html' },
+      { name: 'martian soil', url: '/discover.html' },
+      { name: 'asteroid ore', url: '/discover.html' },
+      { name: 'nova7', url: '/nova7.html' },
+      { name: 'geotrace', url: '/geotrace.html' },
+      { name: 'career', url: '/career.html' },
+      { name: 'contact', url: '/contact.html' },
+    ];
+
+    if (searchContainer && searchInput && searchPlaceholder && searchIcon && suggestionsBox) {
+      searchContainer.addEventListener('click', () => {
+        searchContainer.classList.add('active');
+        searchInput.focus();
+        searchPlaceholder.style.opacity = '0';
+      });
+
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        suggestionsBox.innerHTML = '';
+        if (query.length > 0) {
+          const filteredSuggestions = searchData.filter(item => item.name.includes(query));
+          filteredSuggestions.forEach(item => {
+            const suggestionItem = document.createElement('a');
+            suggestionItem.textContent = item.name;
+            suggestionItem.href = item.url;
+            suggestionItem.classList.add('suggestion-item');
+            suggestionsBox.appendChild(suggestionItem);
+          });
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!searchContainer.contains(event.target) && event.target !== searchIcon) {
+          searchContainer.classList.remove('active');
+          searchPlaceholder.style.opacity = '1';
+          suggestionsBox.innerHTML = '';
+          searchInput.value = '';
+        }
+      });
+
+      searchIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
+        searchContainer.classList.add('active');
+        searchInput.focus();
+        searchPlaceholder.style.opacity = '0';
+      });
+    }
   </script>
 </body>
 </html>
