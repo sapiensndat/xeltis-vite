@@ -1,5 +1,55 @@
 {
   "version": 2,
+  "rewrites": [
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/career",
+      "destination": "/career.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/ip",
+      "destination": "/ip.html"
+    },
+    {
+      "source": "/mission",
+      "destination": "/mission.html"
+    },
+    {
+      "source": "/updates",
+      "destination": "/updates.html"
+    },
+    {
+      "source": "/discover",
+      "destination": "/discover.html"
+    },
+    {
+      "source": "/launches",
+      "destination": "/launches.html"
+    },
+    {
+      "source": "/geotrace",
+      "destination": "/geotrace.html"
+    },
+    {
+      "source": "/mozgis",
+      "destination": "/mozgis.html"
+    },
+    {
+      "source": "/drc",
+      "destination": "/drc.html"
+    },
+    {
+      "source": "/nova7",
+      "destination": "/nova7.html"
+    }
+  ],
   "cleanUrls": true,
   "trailingSlash": false
 }
