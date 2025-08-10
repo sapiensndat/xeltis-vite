@@ -4,22 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XELTIS - Revolutionizing Mineral Intelligence</title>
-  <link rel="icon" type="image/png" href="/favicon.png"> <!-- Added favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/src/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Space+Grotesk:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    /* Ensure <a> tags inside .projects span don't affect appearance */
     .projects span a {
-      color: inherit; /* Inherit text color from parent */
-      text-decoration: none; /* Remove default underline */
+      color: inherit;
+      text-decoration: none;
     }
     .projects span a:hover {
-      text-decoration: none; /* Ensure no underline on hover */
+      text-decoration: none;
+    }
+    .login-btn {
+      background: #ff9800;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    .login-btn:hover {
+      background: #e68a00;
     }
   </style>
 </head>
 <body class="home-page">
-  <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="logo">
@@ -95,13 +105,24 @@
                   </div>
                 </a>
               </li>
+              <li>
+                <a href="https://app.xeltis.org/login.html" data-preview="profile">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <img src="/public/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;">
+                    <span>Profile</span>
+                  </div>
+                  <div class="menu-preview">
+                    <img src="/public/images/login.png" alt="Profile Preview" loading="lazy">
+                    <p>Access your account, settings, and saved projects.</p>
+                  </div>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
-  <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-overlay"></div>
     <video class="hero-video" loop playsinline muted>
@@ -119,7 +140,6 @@
       <h1 class="hero-question">What if the key to humanity’s future lies in the stars?</h1>
     </div>
   </section>
-  <!-- Numbers -->
   <section class="numbers" id="numbers">
     <div class="numbers-grid">
       <div class="number-item">
@@ -136,7 +156,6 @@
       </div>
     </div>
   </section>
-  <!-- Projects Section (Videos) -->
   <section class="section-projects" id="projects">
     <div class="project-item">
       <div class="project-overlay">
@@ -169,7 +188,6 @@
       </video>
     </div>
   </section>
-  <!-- Sign Up Footer -->
   <footer class="signup-footer" id="signup">
     <div class="signup-content">
       <p>Stay updated with the latest from XELTIS</p>
@@ -185,7 +203,6 @@
       <a href="/contact.html">Contact</a>
     </nav>
   </footer>
-  <!-- Chatbot -->
   <div class="chatbot">
     <div class="chatbot-btn">
       <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
