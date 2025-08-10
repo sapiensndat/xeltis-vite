@@ -4,9 +4,5 @@
   "trailingSlash": false,
   "builds": [
     { "src": "dist/**", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/([^/.]+)$", "dest": "/.html" },
-    { "src": "/(.*)", "dest": "/" }
   ]
 }
