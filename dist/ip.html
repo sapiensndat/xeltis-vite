@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Information about trademarks, copyrights, and intellectual property at XELTIS LTD">
   <title>IP Information | XELTIS LTD</title>
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="icon" type="image/png" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/assets/style-DwdnGOhO.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
 </head>
 <body>
-  <!-- Updated Header to Match nova7.html -->
   <header class="header">
     <div class="header-content">
       <div class="logo">
@@ -42,59 +44,213 @@
           </div>
           <nav class="menu">
             <ul>
-              <li><a href="/mission.html">Mission</a></li>
-              <li><a href="/launches.html">Launches</a></li>
-              <li><a href="/career.html">Career</a></li>
-              <li><a href="/updates.html">Updates</a></li>
-              <li><a href="/discover.html">Discover</a></li>
+              <li>
+                <a href="/mission.html" data-preview="mission">
+                  Mission
+                  <div class="menu-preview">
+                    <img src="/assets/menu-mission-DQ6_ByuP.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Explore our cosmic mission to revolutionize mining.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/launches.html" data-preview="launches">
+                  Launches
+                  <div class="menu-preview">
+                    <img src="/assets/menu-launches-DLXViDoZ.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Witness our stellar launches into the future.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/career.html" data-preview="career">
+                  Career
+                  <div class="menu-preview">
+                    <img src="/assets/menu-career-Du-BEyOk.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Join our team to explore new frontiers.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/updates.html" data-preview="updates">
+                  Updates
+                  <div class="menu-preview">
+                    <img src="/assets/menu-updates-2RFdj-og.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Stay updated with our cosmic journey.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/discover.html" data-preview="discover">
+                  Discover
+                  <div class="menu-preview">
+                    <img src="/assets/menu-discover-a2ij1fBe.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Discover the universe with XELTIS.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://app.xeltis.org/login.html" data-preview="profile">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <img src="/assets/login-DdvbIkLk.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
+                    <span>Profile</span>
+                  </div>
+                  <div class="menu-preview">
+                    <img src="/assets/login-DdvbIkLk.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Access your account, settings, and saved projects.</p>
+                  </div>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- IP Information Section -->
   <section class="ip-info">
     <h2>Intellectual Property at XELTIS LTD</h2>
     <div class="ip-content">
       <h3>Trademarks</h3>
       <p>XELTIS LTD owns several registered trademarks, including the XELTIS logo, the Nova7 platform name, and other associated branding elements. These trademarks are protected under international trademark law and may not be used without prior written permission from XELTIS LTD. Unauthorized use of our trademarks may result in legal action.</p>
-
       <h3>Copyrights</h3>
       <p>All content on this website, including text, images, videos, and design elements, is protected by copyright law. XELTIS LTD retains full ownership of this content, and reproduction, distribution, or modification without explicit permission is prohibited. For permissions, please contact us at <a href="mailto:legal@xeltis.space">legal@xeltis.space</a>.</p>
-
       <h3>Patents</h3>
       <p>XELTIS LTD holds patents related to our AI-driven mineral intelligence platform, Nova7, and our satellite-based resource mapping technology. These patents cover innovative methods for mineral deposit identification and sustainable mining practices. For licensing inquiries, please reach out to our legal team.</p>
-
       <h3>Trade Secrets</h3>
       <p>Our proprietary algorithms, data processing techniques, and internal operational methodologies are considered trade secrets. XELTIS LTD takes extensive measures to protect this confidential information, and any unauthorized disclosure or use will be pursued to the fullest extent of the law.</p>
-
       <h3>Contact Us</h3>
       <p>For any inquiries regarding our intellectual property, including permissions, licensing, or legal concerns, please email us at <a href="mailto:legal@xeltis.space">legal@xeltis.space</a>.</p>
     </div>
   </section>
-
-  <!-- Sign Up Footer -->
   <footer class="signup-footer">
     <div class="signup-content">
-      <p>Enter your email to sign up for XELTIS updates:</p>
-      <form class="signup-form">
-        <input type="email" placeholder="Email Address" required>
-        <button type="submit">SIGN UP</button>
+      <p>Stay updated with the latest from XELTIS</p>
+      <form class="signup-form" aria-label="Sign Up Form">
+        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
+        <button type="submit">Sign Up</button>
       </form>
-      <p class="signup-info">
-        Interested in becoming a XELTIS supplier? Please email <a href="mailto:supplier@xeltis.space">supplier@xeltis.space</a>.<br>
-        For information about trademarks, copyrights, and other IP at XELTIS, <a href="ip.html">click here</a>.
-      </p>
-      <div class="footer-links">
-        <span>XELTIS © 2025</span>
-        <a href="#">PRIVACY POLICY</a>
-        <a href="#">SUPPLIERS</a>
+      <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="/terms.html">Terms</a>
+      <a href="/ip.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </footer>
+  <div class="chatbot">
+    <div class="chatbot-btn">
+      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
+      </svg>
+    </div>
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        <h4>XELTIS Assistant</h4>
+        <button class="chatbot-close">×</button>
+      </div>
+      <div class="chatbot-messages">
+        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Type your message...">
+        <button>Send</button>
       </div>
     </div>
-  </footer>
-
-  <script type="module" src="/src/script.js"></script>
+  </div>
+  <script type="module" src="/assets/script-BZOfFXG1.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const chatbotBtn = document.querySelector('.chatbot-btn');
+      const chatbotWindow = document.querySelector('.chatbot-window');
+      const chatbotClose = document.querySelector('.chatbot-close');
+      if (chatbotBtn && chatbotWindow && chatbotClose) {
+        chatbotBtn.addEventListener('click', () => {
+          chatbotWindow.classList.toggle('active');
+          chatbotBtn.classList.toggle('active');
+        });
+        chatbotClose.addEventListener('click', () => {
+          chatbotWindow.classList.remove('active');
+          chatbotBtn.classList.remove('active');
+        });
+      }
+    });
+    const searchContainer = document.querySelector('.search-container');
+    const searchInput = document.querySelector('.search-input');
+    const searchPlaceholder = document.querySelector('.search-placeholder');
+    const searchIcon = document.querySelector('.search-icon');
+    const suggestionsBox = document.querySelector('.suggestions');
+    const searchData = [
+      { name: 'lunar rock', url: '/discover.html' },
+      { name: 'martian soil', url: '/discover.html' },
+      { name: 'asteroid ore', url: '/discover.html' },
+      { name: 'nova7', url: '/nova7.html' },
+      { name: 'geotrace', url: '/geotrace.html' },
+      { name: 'career', url: '/career.html' },
+      { name: 'contact', url: '/contact.html' },
+    ];
+    if (searchContainer && searchInput && searchPlaceholder && searchIcon && suggestionsBox) {
+      searchContainer.addEventListener('click', () => {
+        searchContainer.classList.add('active');
+        searchInput.focus();
+        searchPlaceholder.style.opacity = '0';
+      });
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        suggestionsBox.innerHTML = '';
+        if (query.length > 0) {
+          const filteredSuggestions = searchData.filter(item => item.name.includes(query));
+          filteredSuggestions.forEach(item => {
+            const suggestionItem = document.createElement('a');
+            suggestionItem.textContent = item.name;
+            suggestionItem.href = item.url;
+            suggestionItem.classList.add('suggestion-item');
+            suggestionsBox.appendChild(suggestionItem);
+          });
+        }
+      });
+      document.addEventListener('click', (event) => {
+        if (!searchContainer.contains(event.target) && event.target !== searchIcon) {
+          searchContainer.classList.remove('active');
+          searchPlaceholder.style.opacity = '1';
+          suggestionsBox.innerHTML = '';
+          searchInput.value = '';
+        }
+      });
+      searchIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
+        searchContainer.classList.add('active');
+        searchInput.focus();
+        searchPlaceholder.style.opacity = '0';
+      });
+    }
+    const burgerIcon = document.querySelector('.burger-icon');
+    const menu = document.querySelector('.menu');
+    const discoverBtn = document.querySelector('.discover-btn');
+    if (burgerIcon && menu && discoverBtn) {
+      burgerIcon.addEventListener('click', () => {
+        burgerIcon.classList.toggle('open');
+        menu.classList.toggle('open');
+        discoverBtn.style.display = menu.classList.contains('open') ? 'none' : 'block';
+      });
+      const menuLinks = document.querySelectorAll('.menu a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          burgerIcon.classList.remove('open');
+          menu.classList.remove('open');
+          discoverBtn.style.display = 'block';
+        });
+      });
+      document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !burgerIcon.contains(event.target)) {
+          if (menu.classList.contains('open')) {
+            burgerIcon.classList.remove('open');
+            menu.classList.remove('open');
+            discoverBtn.style.display = 'block';
+          }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
