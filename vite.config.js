@@ -13,7 +13,7 @@ export default defineConfig({
     strictPort: true,
     open: true,
   },
-  base: '/',
+  base: './',
   publicDir: 'public',
   resolve: {
     alias: {
