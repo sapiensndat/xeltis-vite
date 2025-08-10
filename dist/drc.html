@@ -6,7 +6,7 @@
   <meta name="description" content="XELTIS LTD - DRC Project Details">
   <title>DRC | XELTIS LTD</title>
   <link rel="icon" type="image/png" href="/assets/favicon.ico">
-  <link rel="stylesheet" href="/assets/style-DwdnGOhO.css">
+  <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
@@ -41,6 +41,7 @@
       flex-wrap: wrap;
     }
   </style>
+  <script type="module" crossorigin src="/assets/script-BZOfFXG1.js"></script>
 </head>
 <body class="drc-page">
   <header class="header">
@@ -79,7 +80,7 @@
                 <a href="/mission.html" data-preview="mission">
                   Mission
                   <div class="menu-preview">
-                    <img src="/assets/menu-mission-DQ6_ByuP.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/menu-mission.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Explore our cosmic mission to revolutionize mining.</p>
                   </div>
                 </a>
@@ -88,7 +89,7 @@
                 <a href="/launches.html" data-preview="launches">
                   Launches
                   <div class="menu-preview">
-                    <img src="/assets/menu-launches-DLXViDoZ.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/menu-launches.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Witness our stellar launches into the future.</p>
                   </div>
                 </a>
@@ -97,7 +98,7 @@
                 <a href="/career.html" data-preview="career">
                   Career
                   <div class="menu-preview">
-                    <img src="/assets/menu-career-Du-BEyOk.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/menu-career.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Join our team to explore new frontiers.</p>
                   </div>
                 </a>
@@ -106,7 +107,7 @@
                 <a href="/updates.html" data-preview="updates">
                   Updates
                   <div class="menu-preview">
-                    <img src="/assets/menu-updates-2RFdj-og.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/menu-updates.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Stay updated with our cosmic journey.</p>
                   </div>
                 </a>
@@ -115,7 +116,7 @@
                 <a href="/discover.html" data-preview="discover">
                   Discover
                   <div class="menu-preview">
-                    <img src="/assets/menu-discover-a2ij1fBe.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/menu-discover.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Discover the universe with XELTIS.</p>
                   </div>
                 </a>
@@ -123,11 +124,11 @@
               <li>
                 <a href="https://app.xeltis.org/login.html" data-preview="profile">
                   <div style="display:flex;align-items:center;gap:10px;">
-                    <img src="/assets/login-DdvbIkLk.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
                     <span>Profile</span>
                   </div>
                   <div class="menu-preview">
-                    <img src="/assets/login-DdvbIkLk.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <img src="/images/login.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
                     <p>Access your account, settings, and saved projects.</p>
                   </div>
                 </a>
@@ -241,225 +242,5 @@
       </div>
     </div>
   </div>
-  <script type="module" src="/assets/script-BZOfFXG1.js"></script>
-  <script>
-    const counters = document.querySelectorAll('.counter');
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5
-    };
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = +counter.getAttribute('data-target');
-          let count = 0;
-          const increment = target / 200;
-          const updateCounter = () => {
-            count += increment;
-            if (count < target) {
-              counter.textContent = Math.ceil(count).toLocaleString();
-              requestAnimationFrame(updateCounter);
-            } else {
-              counter.textContent = target.toLocaleString();
-            }
-          };
-          updateCounter();
-          observer.unobserve(counter);
-        }
-      });
-    }, options);
-    counters.forEach(counter => {
-      observer.observe(counter);
-    });
-    document.addEventListener('DOMContentLoaded', () => {
-      const chatbotBtn = document.querySelector('.chatbot-btn');
-      const chatbotWindow = document.querySelector('.chatbot-window');
-      const chatbotClose = document.querySelector('.chatbot-close');
-      if (chatbotBtn && chatbotWindow && chatbotClose) {
-        chatbotBtn.addEventListener('click', () => {
-          chatbotWindow.classList.toggle('active');
-          chatbotBtn.classList.toggle('active');
-        });
-        chatbotClose.addEventListener('click', () => {
-          chatbotWindow.classList.remove('active');
-          chatbotBtn.classList.remove('active');
-        });
-      }
-    });
-    document.addEventListener('DOMContentLoaded', () => {
-      const pdfViewer = document.getElementById('pdf-viewer');
-      const prevPageBtn = document.getElementById('prev-page');
-      const nextPageBtn = document.getElementById('next-page');
-      const pageNumSpan = document.getElementById('page-num');
-      const pageCountSpan = document.getElementById('page-count');
-      const zoomInBtn = document.getElementById('zoom-in');
-      const zoomOutBtn = document.getElementById('zoom-out');
-      let pdfDoc = null;
-      let pageNum = 1;
-      let pageRendering = false;
-      let pageNumPending = null;
-      let scale = 1.0;
-      const scaleStep = 0.2;
-      if (typeof pdfjsLib !== 'undefined' && pdfViewer) {
-        pdfjsLib.getDocument(pdfViewer.getAttribute('data-pdf')).promise.then(pdfDoc_ => {
-          pdfDoc = pdfDoc_;
-          pageCountSpan.textContent = pdfDoc.numPages;
-          renderPages(pageNum);
-        }).catch(error => {
-          console.error('Error loading PDF:', error);
-          pdfViewer.innerHTML = '<p style="color: red; text-align: center;">Failed to load PDF. Please try again later.</p>';
-        });
-      }
-      function renderPages(num) {
-        if (pageRendering) return;
-        pageRendering = true;
-        pdfViewer.innerHTML = '';
-        const pagesToShow = pdfDoc.numPages - num + 1 > 1 ? 2 : 1;
-        const startPage = num;
-        const promises = [];
-        for (let i = 0; i < pagesToShow; i++) {
-          const pageNumber = startPage + i;
-          if (pageNumber > pdfDoc.numPages) break;
-          promises.push(pdfDoc.getPage(pageNumber).then(page => {
-            const canvas = document.createElement('canvas');
-            canvas.className = 'pdf-page';
-            const ctx = canvas.getContext('2d');
-            const viewport = page.getViewport({ scale: scale });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            const renderContext = { canvasContext: ctx, viewport: viewport };
-            return page.render(renderContext).promise.then(() => canvas);
-          }));
-        }
-        Promise.all(promises).then(canvases => {
-          canvases.forEach(canvas => pdfViewer.appendChild(canvas));
-          pageRendering = false;
-          if (pageNumPending !== null) {
-            renderPages(pageNumPending);
-            pageNumPending = null;
-          }
-        }).catch(error => {
-          console.error('Error rendering pages:', error);
-          pageRendering = false;
-        });
-        pageNumSpan.textContent = num;
-      }
-      function queueRenderPage(num) {
-        if (pageRendering) {
-          pageNumPending = num;
-        } else {
-          renderPages(num);
-        }
-      }
-      if (prevPageBtn) {
-        prevPageBtn.addEventListener('click', () => {
-          if (pageNum <= 1) return;
-          pageNum -= 2;
-          if (pageNum < 1) pageNum = 1;
-          queueRenderPage(pageNum);
-        });
-      }
-      if (nextPageBtn) {
-        nextPageBtn.addEventListener('click', () => {
-          if (pageNum >= pdfDoc.numPages) return;
-          pageNum += 2;
-          if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages - (pdfDoc.numPages % 2 === 0 ? 1 : 0);
-          if (pageNum > pdfDoc.numPages) pageNum = pdfDoc.numPages;
-          queueRenderPage(pageNum);
-        });
-      }
-      if (zoomInBtn) {
-        zoomInBtn.addEventListener('click', () => {
-          scale += scaleStep;
-          queueRenderPage(pageNum);
-        });
-      }
-      if (zoomOutBtn) {
-        zoomOutBtn.addEventListener('click', () => {
-          if (scale <= scaleStep) return;
-          scale -= scaleStep;
-          queueRenderPage(pageNum);
-        });
-      }
-    });
-    const burgerIcon = document.querySelector('.burger-icon');
-    const menu = document.querySelector('.menu');
-    const discoverBtn = document.querySelector('.discover-btn');
-    if (burgerIcon && menu && discoverBtn) {
-      burgerIcon.addEventListener('click', () => {
-        burgerIcon.classList.toggle('open');
-        menu.classList.toggle('open');
-        discoverBtn.style.display = menu.classList.contains('open') ? 'none' : 'block';
-      });
-      const menuLinks = document.querySelectorAll('.menu a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          burgerIcon.classList.remove('open');
-          menu.classList.remove('open');
-          discoverBtn.style.display = 'block';
-        });
-      });
-      document.addEventListener('click', (event) => {
-        if (!menu.contains(event.target) && !burgerIcon.contains(event.target)) {
-          if (menu.classList.contains('open')) {
-            burgerIcon.classList.remove('open');
-            menu.classList.remove('open');
-            discoverBtn.style.display = 'block';
-          }
-        }
-      });
-    }
-    const searchContainer = document.querySelector('.search-container');
-    const searchInput = document.querySelector('.search-input');
-    const searchPlaceholder = document.querySelector('.search-placeholder');
-    const searchIcon = document.querySelector('.search-icon');
-    const suggestionsBox = document.querySelector('.suggestions');
-    const searchData = [
-      { name: 'lunar rock', url: '/discover.html' },
-      { name: 'martian soil', url: '/discover.html' },
-      { name: 'asteroid ore', url: '/discover.html' },
-      { name: 'nova7', url: '/nova7.html' },
-      { name: 'geotrace', url: '/geotrace.html' },
-      { name: 'career', url: '/career.html' },
-      { name: 'contact', url: '/contact.html' },
-    ];
-    if (searchContainer && searchInput && searchPlaceholder && searchIcon && suggestionsBox) {
-      searchContainer.addEventListener('click', () => {
-        searchContainer.classList.add('active');
-        searchInput.focus();
-        searchPlaceholder.style.opacity = '0';
-      });
-      searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase();
-        suggestionsBox.innerHTML = '';
-        if (query.length > 0) {
-          const filteredSuggestions = searchData.filter(item => item.name.includes(query));
-          filteredSuggestions.forEach(item => {
-            const suggestionItem = document.createElement('a');
-            suggestionItem.textContent = item.name;
-            suggestionItem.href = item.url;
-            suggestionItem.classList.add('suggestion-item');
-            suggestionsBox.appendChild(suggestionItem);
-          });
-        }
-      });
-      document.addEventListener('click', (event) => {
-        if (!searchContainer.contains(event.target) && event.target !== searchIcon) {
-          searchContainer.classList.remove('active');
-          searchPlaceholder.style.opacity = '1';
-          suggestionsBox.innerHTML = '';
-          searchInput.value = '';
-        }
-      });
-      searchIcon.addEventListener('click', (event) => {
-        event.stopPropagation();
-        searchContainer.classList.add('active');
-        searchInput.focus();
-        searchPlaceholder.style.opacity = '0';
-      });
-    }
-  </script>
 </body>
 </html>

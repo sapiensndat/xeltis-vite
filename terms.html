@@ -5,18 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="XELTIS LTD - Terms of Service">
   <title>Terms | XELTIS LTD</title>
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="icon" type="image/png" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <style>
-    /* Ensure <a> tags inside .projects span don't affect appearance */
-    .projects span a {
-      color: inherit; /* Inherit text color from parent */
-      text-decoration: none; /* Remove default underline */
-    }
-    .projects span a:hover {
-      text-decoration: none; /* Ensure no underline on hover */
-    }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
 </head>
 <body class="terms-page">
   <header class="header">
@@ -51,19 +44,69 @@
           </div>
           <nav class="menu">
             <ul>
-              <li><a href="/mission.html">Mission</a></li>
-              <li><a href="/launches.html">Launches</a></li>
-              <li><a href="/career.html">Career</a></li>
-              <li><a href="/updates.html">Updates</a></li>
-              <li><a href="/discover.html">Discover</a></li>
+              <li>
+                <a href="/mission.html" data-preview="mission">
+                  Mission
+                  <div class="menu-preview">
+                    <img src="/images/menu-mission.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Explore our cosmic mission to revolutionize mining.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/launches.html" data-preview="launches">
+                  Launches
+                  <div class="menu-preview">
+                    <img src="/images/menu-launches.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Witness our stellar launches into the future.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/career.html" data-preview="career">
+                  Career
+                  <div class="menu-preview">
+                    <img src="/images/menu-career.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Join our team to explore new frontiers.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/updates.html" data-preview="updates">
+                  Updates
+                  <div class="menu-preview">
+                    <img src="/images/menu-updates.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Stay updated with our cosmic journey.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/discover.html" data-preview="discover">
+                  Discover
+                  <div class="menu-preview">
+                    <img src="/images/menu-discover.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Discover the universe with XELTIS.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://app.xeltis.org/login.html" data-preview="profile">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <img src="/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
+                    <span>Profile</span>
+                  </div>
+                  <div class="menu-preview">
+                    <img src="/images/login.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Access your account, settings, and saved projects.</p>
+                  </div>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- Terms Section -->
   <section class="terms">
     <h2>Terms of Service</h2>
     <p>By using this website, you agree to the following terms and conditions:</p>
@@ -75,7 +118,6 @@
     </ul>
     <p>These terms are subject to change at any time without notice. Last updated: May 6, 2025.</p>
   </section>
-
   <footer class="signup-footer" id="signup">
     <div class="signup-content">
       <p>Stay updated with the latest from XELTIS</p>
@@ -91,7 +133,6 @@
       <a href="/contact.html">Contact</a>
     </nav>
   </footer>
-
   <div class="chatbot">
     <div class="chatbot-btn">
       <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -113,7 +154,6 @@
       </div>
     </div>
   </div>
-
   <script type="module" src="/src/script.js"></script>
 </body>
 </html>

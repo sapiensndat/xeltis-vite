@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="XELTIS's mission to revolutionize mineral intelligence and trade">
   <title>Mission | XELTIS LTD</title>
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="icon" type="image/png" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
   <style>
-    /* Ensure <a> tags inside .projects span don't affect appearance */
     .projects span a {
-      color: inherit; /* Inherit text color from parent */
-      text-decoration: none; /* Remove default underline */
+      color: inherit;
+      text-decoration: none;
     }
     .projects span a:hover {
-      text-decoration: none; /* Ensure no underline on hover */
+      text-decoration: none;
     }
   </style>
 </head>
@@ -51,18 +53,69 @@
           </div>
           <nav class="menu">
             <ul>
-              <li><a href="/mission.html">Mission</a></li>
-              <li><a href="/launches.html">Launches</a></li>
-              <li><a href="/career.html">Career</a></li>
-              <li><a href="/updates.html">Updates</a></li>
-              <li><a href="/discover.html">Discover</a></li>
+              <li>
+                <a href="/mission.html" data-preview="mission">
+                  Mission
+                  <div class="menu-preview">
+                    <img src="/images/menu-mission.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Explore our cosmic mission to revolutionize mining.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/launches.html" data-preview="launches">
+                  Launches
+                  <div class="menu-preview">
+                    <img src="/images/menu-launches.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Witness our stellar launches into the future.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/career.html" data-preview="career">
+                  Career
+                  <div class="menu-preview">
+                    <img src="/images/menu-career.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Join our team to explore new frontiers.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/updates.html" data-preview="updates">
+                  Updates
+                  <div class="menu-preview">
+                    <img src="/images/menu-updates.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Stay updated with our cosmic journey.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/discover.html" data-preview="discover">
+                  Discover
+                  <div class="menu-preview">
+                    <img src="/images/menu-discover.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Discover the universe with XELTIS.</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://app.xeltis.org/login.html" data-preview="profile">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <img src="/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
+                    <span>Profile</span>
+                  </div>
+                  <div class="menu-preview">
+                    <img src="/images/login.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
+                    <p>Access your account, settings, and saved projects.</p>
+                  </div>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
-  <!-- Hero with Quote and Image Background -->
   <section class="hero">
     <div class="hero-content">
       <blockquote>
@@ -71,7 +124,6 @@
       </blockquote>
     </div>
   </section>
-  <!-- Numbers Section (Animated) -->
   <section class="numbers">
     <div class="numbers-grid">
       <div class="number-item">
@@ -92,7 +144,6 @@
       </div>
     </div>
   </section>
-  <!-- Timeline Carousel -->
   <section class="timeline">
     <div class="timeline-nav">
       <div class="timeline-bubble"><button class="year-btn active" data-year="2019">2019</button></div>
@@ -102,33 +153,33 @@
     </div>
     <div class="timeline-content">
       <button class="arrow left-arrow">
-        <svg class="arrow-icon" viewBox="0 0 24  Gestalt24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
       <div class="timeline-slide active" data-year="2019">
-        <img src="/images/timeline-2019-image.jpg" alt="Foundation of Vision" loading="lazy">
+        <img src="/images/timeline-2019-image.jpg" alt="Foundation of Vision" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         <div class="slide-text">
           <h3>Foundation of Vision</h3>
           <p>XELTIS founded by Sapiens Ndatabaye to tackle mineral mismanagement. Began developing Nova7, the AI-powered mineral intelligence platform.</p>
         </div>
       </div>
       <div class="timeline-slide" data-year="2020">
-        <img src="/images/timeline-2020-fallback.jpg" alt="First Breakthroughs" loading="lazy">
+        <img src="/images/timeline-2020-fallback.jpg" alt="First Breakthroughs" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         <div class="slide-text">
           <h3>First Breakthroughs</h3>
           <p>Completed Shabunda (gold) and Walikale (tin) missions in DRC, saving $450K and supporting 5,000 people with jobs and infrastructure.</p>
         </div>
       </div>
       <div class="timeline-slide" data-year="2021">
-        <img src="/images/timeline-2021-fallback.jpg" alt="Scaling Impact" loading="lazy">
+        <img src="/images/timeline-2021-fallback.jpg" alt="Scaling Impact" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         <div class="slide-text">
           <h3>Scaling Impact</h3>
           <p>Katanga (cobalt, lithium) and Katana (copper) missions uncovered $41.5K in minerals, saved $550K, and empowers 5,000 locals.</p>
         </div>
       </div>
       <div class="timeline-slide" data-year="2022">
-        <img src="/images/timeline-2022-image.jpg" alt="Global Reach" loading="lazy">
+        <img src="/images/timeline-2022-image.jpg" alt="Global Reach" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         <div class="slide-text">
           <h3>Global Reach</h3>
           <p>Maniema (rare earths) and South Kivu (coltan) missions generated $465K, supported 7,000 people, and mapped 80+ countries.</p>
@@ -141,9 +192,7 @@
       </button>
     </div>
   </section>
-  <!-- What Makes Us Successful Section (Values) -->
   <section class="success-story">
-    <!-- Innovation: Text Left, Video Right -->
     <div class="story-item">
       <div class="story-text">
         <h3>Pioneering the Future with AI</h3>
@@ -152,11 +201,10 @@
       <div class="story-media">
         <video autoplay muted loop playsinline class="story-video">
           <source src="/videos/vision-video.mp4" type="video/mp4">
-          <img src="/images/vision-fallback.jpg" alt="Vision Fallback" loading="lazy">
+          <img src="/images/vision-fallback.jpg" alt="Vision Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         </video>
       </div>
     </div>
-    <!-- Sustainability: Text Right, Video Left -->
     <div class="story-item">
       <div class="story-text story-text-right">
         <h3>Mining for a Greener Tomorrow</h3>
@@ -165,11 +213,10 @@
       <div class="story-media story-media-left">
         <video autoplay muted loop playsinline class="story-video">
           <source src="/videos/sustainability-video.mp4" type="video/mp4">
-          <img src="/images/sustainability-fallback.jpg" alt="Sustainability Fallback" loading="lazy">
+          <img src="/images/sustainability-fallback.jpg" alt="Sustainability Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         </video>
       </div>
     </div>
-    <!-- Collaboration: Text Left, Video Right -->
     <div class="story-item">
       <div class="story-text">
         <h3>Building Global Bridges</h3>
@@ -178,12 +225,11 @@
       <div class="story-media">
         <video autoplay muted loop playsinline class="story-video">
           <source src="/videos/collaboration-video.mp4" type="video/mp4">
-          <img src="/images/collaboration-fallback.jpg" alt="Collaboration Fallback" loading="lazy">
+          <img src="/images/collaboration-fallback.jpg" alt="Collaboration Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
         </video>
       </div>
     </div>
   </section>
-  <!-- Facilities Section -->
   <section class="facilities">
     <h2>XELTIS Facilities</h2>
     <div class="facilities-container">
@@ -228,11 +274,9 @@
       </div>
     </div>
   </section>
-  <!-- Moving Info Band (Facilities Info) -->
   <section class="facilities-info-band">
     <div class="info-band-container" id="facilities-info-band"></div>
   </section>
-  <!-- Sign Up Footer -->
   <footer class="signup-footer" id="signup">
     <div class="signup-content">
       <p>Stay updated with the latest from XELTIS</p>
@@ -248,7 +292,6 @@
       <a href="/contact.html">Contact</a>
     </nav>
   </footer>
-  <!-- Chatbot -->
   <div class="chatbot">
     <div class="chatbot-btn">
       <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
