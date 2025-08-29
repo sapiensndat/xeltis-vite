@@ -1,4 +1,3 @@
-// src/script.js
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Globe from 'globe.gl';
@@ -147,7 +146,7 @@ const initHeader = () => {
       );
       filteredSuggestions.forEach(item => {
         const suggestionItem = document.createElement('div');
-        suggestionItem.className = 'suggestion-item'; // Add a class for styling
+        suggestionItem.className = 'suggestion-item';
         suggestionItem.innerHTML = `
           <div class="suggestion-name">${item.name}</div>
           <div class="suggestion-description">${item.description}</div>
@@ -189,7 +188,7 @@ const initHeroTyping = () => {
   const heroQuote = document.querySelector('.hero blockquote');
   if (!heroText || !heroVideo || !heroSection) return;
 
-  const text = heroText.textContent; // Use the text already in the HTML
+  const text = heroText.textContent;
   heroText.textContent = '';
 
   let charIndex = 0;
@@ -653,7 +652,8 @@ const initFacilities = async () => {
       { name: 'London', lat: 51.5074, lng: -0.1278, index: 0, active: false, hovered: false },
       { name: 'Washington, DC', lat: 38.9072, lng: -77.0369, index: 1, active: false, hovered: false },
       { name: 'Ottawa', lat: 45.4215, lng: -75.6972, index: 2, active: false, hovered: false },
-      { name: 'Sandton, Johannesburg', lat: -26.1076, lng: 28.0567, index: 3, active: false, hovered: false }
+      { name: 'Sandton, Johannesburg', lat: -26.1076, lng: 28.0567, index: 3, active: false, hovered: false },
+      { name: 'Jakarta', lat: -6.2088, lng: 106.8456, index: 4, active: false, hovered: false }
     ];
   }
 
@@ -724,7 +724,21 @@ const initFacilities = async () => {
       })
       .pointRadius(d => (d.hovered || d.active) ? 1.5 : 1)
       .pointAltitude(0.1)
-      .pointsData(facilities);
+      .pointsData(facilities)
+      .onGlobeReady(() => {
+        console.log('Globe is ready');
+        globeContainer.style.background = 'transparent';
+      });
+
+    // Fallback for globe image loading failure
+    globe.onGlobeReady(() => {
+      const img = new Image();
+      img.src = '//unpkg.com/three-globe/example/img/earth-dark.jpg';
+      img.onerror = () => {
+        console.warn('Globe image failed to load, using fallback');
+        globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+      };
+    });
 
     const rotationSpeed = 1;
     globe.controls().autoRotate = true;
@@ -841,6 +855,7 @@ const initFacilities = async () => {
     });
   } catch (error) {
     console.error('Error initializing globe:', error);
+    globeContainer.innerHTML = '<p>Unable to load globe. Please try again later.</p>';
   }
 };
 
@@ -970,7 +985,6 @@ const initPdfViewer = () => {
 
   if (!pdfContainer || !pdfUrl) return;
 
-  // Load PDF.js
   const pdfjsLib = window['pdfjs-dist/build/pdf'];
   pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
@@ -1036,7 +1050,6 @@ const initPdfViewer = () => {
     renderPage(pageNum);
   });
 
-  // Animation for PDF viewer
   gsap.from(pdfContainer, {
     scrollTrigger: {
       trigger: '.pdf-section',
