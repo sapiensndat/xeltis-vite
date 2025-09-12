@@ -27,3 +27,4 @@ dist-ssr
 .netlify
 Nova7_Mining/
 .vercel
+public/videos/*.mp4
