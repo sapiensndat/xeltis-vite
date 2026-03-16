@@ -7,13 +7,7 @@
   ],
   "functions": {
     "api/**/*.py": {
-      "excludeFiles": [
-        "node_modules/**",
-        "videos/**",
-        "images/**",
-        "dist/**",
-        "src/**"
-      ]
+      "excludeFiles": "{node_modules/**,videos/**,images/**,dist/**,src/**,public/**}"
     }
   }
 }
