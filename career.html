@@ -366,7 +366,7 @@
       resultDiv.style.color = "";
 
       try {
-        const response = await fetch('http://localhost:5001/api/apply', {
+        const response = await fetch('/api/apply', {
           method: 'POST',
           body: formData
         });
