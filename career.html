@@ -8,16 +8,28 @@
   <link rel="icon" type="image/png" href="/assets/favicon.ico">
   <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+
   <style>
-    .projects span a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .projects span a:hover {
-      text-decoration: none;
-    }
+    .projects span a { color: inherit; text-decoration: none; }
+    .projects span a:hover { text-decoration: none; }
+    .job-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,193,7,0.2); transition: 0.3s; cursor: pointer; }
+    .job-card:hover { border-color: #FFC107; background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; overflow-y: auto; padding: 20px; }
+    .modal-content { background: #111; border: 1px solid #FFC107; padding: 40px; border-radius: 20px; width: 100%; max-width: 800px; text-align: left; position: relative; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .modal-close { position: absolute; top: 20px; right: 25px; background: none; color: white; border: none; font-size: 30px; cursor: pointer; transition: 0.2s; }
+    .modal-close:hover { color: #FFC107; }
+    .modal-list { margin-left: 20px; color: #ccc; margin-bottom: 20px; }
+    .modal-list li { margin-bottom: 8px; }
+
+    /* Search & Filter Styles */
+    .filter-container { margin-bottom: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .search-bar { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,193,7,0.3); color: white; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 400px; outline: none; transition: 0.3s; }
+    .search-bar:focus { border-color: #FFC107; }
+    .filter-select { background: #111; border: 1px solid rgba(255,193,7,0.3); color: white; padding: 12px; border-radius: 8px; cursor: pointer; outline: none; transition: 0.3s; }
+    .filter-select:hover { border-color: #FFC107; }
   </style>
 </head>
 <body class="career-page">
@@ -35,15 +47,6 @@
         <span data-project="drc"><a href="/drc.html">DRC</a></span>
       </div>
       <div class="header-right">
-        <div class="search-container">
-          <input type="text" class="search-input" placeholder="" aria-label="Search">
-          <span class="search-placeholder">explore</span>
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <div class="suggestions"></div>
-        </div>
         <button class="discover-btn">DISCOVER</button>
         <div class="burger-menu">
           <div class="burger-icon">
@@ -53,60 +56,12 @@
           </div>
           <nav class="menu">
             <ul>
-              <li>
-                <a href="/mission.html" data-preview="mission">
-                  Mission
-                  <div class="menu-preview">
-                    <img src="/images/menu-mission.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Explore our cosmic mission to revolutionize mining.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/launches.html" data-preview="launches">
-                  Launches
-                  <div class="menu-preview">
-                    <img src="/images/menu-launches.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Witness our stellar launches into the future.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/career.html" data-preview="career">
-                  Career
-                  <div class="menu-preview">
-                    <img src="/images/menu-career.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Join our team to explore new frontiers.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/updates.html" data-preview="updates">
-                  Updates
-                  <div class="menu-preview">
-                    <img src="/images/menu-updates.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Stay updated with our cosmic journey.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/discover.html" data-preview="discover">
-                  Discover
-                  <div class="menu-preview">
-                    <img src="/images/menu-discover.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Discover the universe with XELTIS.</p>
-                  </div>
-                </a>
-              </li>
+              <li><a href="/career.html">Career</a></li>
               <li>
                 <a href="https://app.xeltis.org/login.html" data-preview="profile">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <img src="/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
                     <span>Profile</span>
-                  </div>
-                  <div class="menu-preview">
-                    <img src="/images/login.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Access your account, settings, and saved projects.</p>
                   </div>
                 </a>
               </li>
@@ -116,119 +71,358 @@
       </div>
     </div>
   </header>
+
   <section class="career-header">
     <h1>FIND YOUR FUTURE</h1>
-    <p>XELTIS is looking for world-class talent ready to tackle challenging projects that will ultimately enable sustainable resource extraction from other planets. We are an equal opportunity employer offering competitive salaries, comprehensive health benefits, and equity packages.</p>
+    <p>XELTIS is actively forming an elite Advisory Council. We are looking for world-class talent to tackle challenging projects that will fundamentally reshape sovereign intelligence, resource extraction, and global monitoring.</p>
   </section>
+
   <section class="career">
     <div class="impact-item">
       <video class="impact-video" autoplay muted loop playsinline>
         <source src="/videos/vision-video.mp4" type="video/mp4">
-        <img src="/images/vision-fallback.jpg" alt="Vision Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
       </video>
       <div class="impact-overlay">
-        <h3>MAKE AN IMPACT: ROSTER OF ASTRONAUTS</h3>
-        <p>Join the teams responsible for designing, building, and testing spacecraft to safely carry astronauts to and from extraterrestrial mining sites.</p>
+        <h3>MAKE AN IMPACT: MINING & RESOURCES</h3>
+        <p>Guide the development of sovereign mineral targeting and ensure compliance with international JORC and NI 43-101 standards.</p>
       </div>
     </div>
     <div class="impact-item">
       <video class="impact-video" autoplay muted loop playsinline>
         <source src="/videos/sustainability-video.mp4" type="video/mp4">
-        <img src="/images/sustainability-fallback.jpg" alt="Sustainability Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
       </video>
       <div class="impact-overlay">
-        <h3>MAKE AN IMPACT: ROSTER OF GEOLOGISTS</h3>
-        <p>Work with global teams to analyze extraterrestrial geological data, helping to identify and map valuable mineral deposits.</p>
+        <h3>MAKE AN IMPACT: ESG & CARBON</h3>
+        <p>Ensure Xeltis environmental monitoring aligns with global carbon market standards like Verra VCS and ISO 14064.</p>
       </div>
     </div>
     <div class="impact-item">
       <video class="impact-video" autoplay muted loop playsinline>
         <source src="/videos/collaboration-video.mp4" type="video/mp4">
-        <img src="/images/collaboration-fallback.jpg" alt="Collaboration Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
       </video>
       <div class="impact-overlay">
-        <h3>MAKE AN IMPACT: ROSTER OF DRONE PILOTS</h3>
-        <p>Operate drones to collect data from remote planetary surfaces, supporting our mineral intelligence missions.</p>
+        <h3>MAKE AN IMPACT: DEFENSE & SECURITY</h3>
+        <p>Guide our Sovereign Defense engine to ensure outputs meet the highest NATO and intelligence community operational standards.</p>
       </div>
     </div>
     <div class="impact-item">
       <video class="impact-video" autoplay muted loop playsinline>
         <source src="/videos/vision-video.mp4" type="video/mp4">
-        <img src="/images/vision-fallback.jpg" alt="Vision Fallback" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
       </video>
       <div class="impact-overlay">
-        <h3>MAKE AN IMPACT: INTERNSHIPS</h3>
-        <p>Join our internship program to gain hands-on experience in space resource extraction and AI technology.</p>
+        <h3>MAKE AN IMPACT: DISASTER RESPONSE</h3>
+        <p>Ensure Xeltis intelligence provides accurate, life-saving information for international humanitarian organizations and NGOs.</p>
       </div>
     </div>
   </section>
-  <section class="jobs-list">
-    <h2>Current Openings</h2>
-    <div class="job-item">
-      <h3>Astronaut - Exploration Team</h3>
-      <p>Join our roster of astronauts to explore and extract resources from extraterrestrial sites.</p>
-      <a href="/contact.html" class="btn">Apply Now</a>
+
+  <section class="jobs-list" style="padding: 50px 10%; max-width: 1400px; margin: 0 auto;">
+    <h2 style="letter-spacing: 5px; color: #FFC107; text-align: center; margin-bottom: 50px;">ADVISORY COUNCIL OPENINGS</h2>
+    
+    <div class="filter-container">
+      <input type="text" id="jobSearch" class="search-bar" placeholder="Search by title or keyword..." onkeyup="filterJobs()">
+      <select id="domainFilter" class="filter-select" onchange="filterJobs()">
+        <option value="all">All Domains</option>
+        <option value="Mineral">Mineral Exploration</option>
+        <option value="Carbon">Sustainability & ESG</option>
+        <option value="Infrastructure">Infrastructure</option>
+        <option value="Defense">Defense & Security</option>
+        <option value="Disaster">Disaster Response</option>
+        <option value="Operations">Industrial Systems</option>
+      </select>
     </div>
-    <div class="job-item">
-      <h3>Geologist - Planetary Analysis</h3>
-      <p>Analyze geological data from other planets to support our mineral mapping efforts.</p>
-      <a href="/contact.html" class="btn">Apply Now</a>
-    </div>
-    <div class="job-item">
-      <h3>Drone Pilot - Remote Operations</h3>
-      <p>Operate drones to collect data from remote planetary surfaces.</p>
-      <a href="/contact.html" class="btn">Apply Now</a>
-    </div>
-    <div class="job-item">
-      <h3>Intern - AI & Space Tech</h3>
-      <p>Gain experience in AI-driven mineral intelligence and space technology.</p>
-      <a href="/contact.html" class="btn">Apply Now</a>
-    </div>
-    <div class="job-links">
-      <a href="/contact.html" class="btn">VIEW ALL OPENINGS</a>
-      <a href="/contact.html" class="btn">VIEW INTERNSHIPS</a>
+
+    <div id="jobsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
     </div>
   </section>
+
+  <div id="jobDetailsModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 900px; padding: 50px; border: 1px solid rgba(255, 193, 7, 0.3); background: #0a0a0a; box-shadow: 0 0 40px rgba(0,0,0,0.9);">
+      <button class="modal-close" onclick="closeDetailsModal()" style="top: 25px; right: 30px;">&times;</button>
+
+      <div style="border-bottom: 1px solid rgba(255,193,7,0.2); padding-bottom: 25px; margin-bottom: 35px;">
+          <p id="detailDomain" style="color: #FFC107; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px;"></p>
+          <h2 id="detailTitle" style="font-size: 2.8rem; font-family: 'Space Grotesk'; margin-bottom: 20px; line-height: 1.1;"></h2>
+
+          <div style="display: flex; gap: 40px; font-size: 0.95rem;">
+            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Time Commitment</strong> <span id="detailTime" style="color:#fff; font-weight: bold;"></span></div>
+            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Compensation</strong> <span id="detailComp" style="color:#FFC107; font-weight: bold;"></span></div>
+            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Clearance Level</strong> <span style="color:#fff; font-weight: bold;">Executive Advisory</span></div>
+          </div>
+      </div>
+
+      <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Mission Objective</h3>
+      <p id="detailMission" style="color: #ddd; margin-bottom: 40px; line-height: 1.8; font-size: 1.05rem;"></p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+          <div>
+              <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Strategic Responsibilities</h3>
+              <ul id="detailResponsibilities" class="modal-list" style="margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ccc;"></ul>
+          </div>
+          <div>
+              <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Regulatory & Industry Standards</h3>
+              <ul id="detailStandards" class="modal-list" style="margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ccc;"></ul>
+          </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 10px; border-left: 4px solid #FFC107; margin-bottom: 40px;">
+          <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Ideal Candidate Background</h3>
+          <ul id="detailBackground" class="modal-list" style="margin-bottom: 0; margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ddd;"></ul>
+      </div>
+
+      <div style="text-align: right; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+        <button onclick="openApplyModal()" class="discover-btn" style="padding: 15px 40px; font-size: 1rem; font-weight: bold; background: #FFC107; color: #000; border: none; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk';">Submit Candidacy &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="applyModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 550px; text-align: center;">
+      <button class="modal-close" onclick="closeApplyModal()">&times;</button>
+      <h3 style="color: #FFC107; margin-bottom: 10px; font-family: 'Space Grotesk';">Submit Candidacy</h3>
+      <p style="color: #aaa; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.5;">Upload your CV (PDF or Word). Our AI will instantly review your background against the <span id="applyRoleName" style="color:white; font-weight:bold;"></span> criteria.</p>
+
+      <input type="file" id="cvFile" accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" style="margin-bottom: 20px; width: 100%; color: white; background: #1a1a1a; padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+
+      <button id="submitCvBtn" onclick="submitApplication()" class="discover-btn" style="width: 100%; margin-top: 10px; padding: 15px;">SUBMIT FOR AI REVIEW</button>
+
+      <div id="aiLoading" style="display: none; margin-top: 25px; color: #FFC107; font-weight: bold; letter-spacing: 2px;">
+        ANALYZING PROFILE...
+      </div>
+      <div id="aiResult" style="margin-top: 25px; padding: 10px; text-align: left;"></div>
+    </div>
+  </div>
+
   <section class="life-at-xeltis">
     <h2>LIFE AT XELTIS</h2>
-    <p>At XELTIS, we are actively developing technologies with the potential to change the course of resource extraction on Earth and beyond. We believe that hard work and innovative solutions result in big gains, so we prioritize hiring top talent and cultivating a culture based on merit. From building our interplanetary mining systems to deploying AI-driven intelligence platforms, all XELTIS employees directly contribute to making our mission of sustainable cosmic resource extraction a reality.</p>
+    <p>At XELTIS, we are actively developing technologies with the potential to change the course of resource extraction on Earth and beyond. We believe that hard work and innovative solutions result in big gains, so we prioritize hiring top talent and cultivating a culture based on merit.</p>
   </section>
+
   <footer class="signup-footer" id="signup">
-    <div class="signup-content">
-      <p>Stay updated with the latest from XELTIS</p>
-      <form class="signup-form" aria-label="Sign Up Form">
-        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
-        <button type="submit">Sign Up</button>
-      </form>
-      <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
-    </div>
     <nav class="footer-links" aria-label="Footer Navigation">
       <a href="/terms.html">Terms</a>
       <a href="/ip.html">Privacy</a>
       <a href="/contact.html">Contact</a>
     </nav>
   </footer>
-  <div class="chatbot">
-    <div class="chatbot-btn">
-      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
-        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
-      </svg>
-    </div>
-    <div class="chatbot-window">
-      <div class="chatbot-header">
-        <h4>XELTIS Assistant</h4>
-        <button class="chatbot-close">×</button>
-      </div>
-      <div class="chatbot-messages">
-        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
-      </div>
-      <div class="chatbot-input">
-        <input type="text" placeholder="Type your message...">
-        <button>Send</button>
-      </div>
-    </div>
-  </div>
+
+  <script>
+    // Fix GSAP warning
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // Full detailed jobs data
+    const jobsData = [
+      {
+        title: "Mining Intelligence Advisor",
+        domain: "Mineral Exploration & Resource Modeling",
+        mission: "Serve as the principal geological authority for Xeltis, ensuring that our AI-driven mineral targeting models and spatial consensus engines strictly adhere to the highest institutional and international reporting standards. You will directly influence the development pipeline to guarantee outputs are actionable for Tier-1 mining operators and sovereign wealth funds.",
+        responsibilities: ["Validate and audit advanced mineral targeting methodologies for global deployment.", "Ensure absolute compliance with institutional reporting frameworks.", "Lead strategic outreach to high-level mining executives and government bodies.", "Assist engineering teams in interpreting complex, multi-spectral geological results.", "Bolster institutional credibility with Tier-1 mining investors and stakeholders."],
+        standards: ["JORC Code (Australasian Joint Ore Reserves Committee)", "NI 43-101 (Canadian mining disclosure standard)", "Initiative for Responsible Mining Assurance (IRMA)"],
+        background: ["Former Exploration Director or VP of Exploration.", "Senior Executive Geologist at a major, multinational mining corporation.", "Geological survey expert with significant government advisory experience.", "Demonstrated executive tenure at organizations such as Rio Tinto, Barrick Gold, or BHP."],
+        time: "3–5 hours per month",
+        comp: "0.5% – 1% equity (Advisor Shares)"
+      },
+      {
+        title: "Carbon & ESG Advisor",
+        domain: "Carbon Markets & Environmental Sustainability",
+        mission: "Direct the strategic alignment of Xeltis environmental monitoring and carbon analytics engines. Your expertise will ensure our automated telemetry accurately satisfies global carbon market standards, enabling seamless verification for international sustainability reporting frameworks.",
+        responsibilities: ["Audit and guide the architecture of carbon credit verification features.", "Validate the scientific methodologies behind our global ecosystem monitoring.", "Broker and support strategic partnerships with leading global climate organizations.", "Advise product teams on generating institutional-grade ESG metrics for investors."],
+        standards: ["Verra Verified Carbon Standard (VCS)", "ISO 14064 Greenhouse Gas Accounting", "The Gold Standard Foundation methodologies"],
+        background: ["Subject matter expert in climate finance and institutional carbon markets.", "Specialist in global carbon credit registry compliance and verification.", "Former Chief Sustainability Officer at a major multinational.", "Experience advising or directing initiatives at the World Resources Institute (WRI) or UNEP."],
+        time: "2–4 hours per month",
+        comp: "0.25% – 0.75% equity (Advisor Shares)"
+      },
+      {
+        title: "Infrastructure & Engineering Advisor",
+        domain: "Infrastructure Monitoring & Structural Risk",
+        mission: "Provide critical engineering oversight for the Xeltis infrastructure intelligence hub. You will ensure our satellite and telemetry-driven risk assessment models meet rigorous structural engineering standards for large-scale asset and resilience planning.",
+        responsibilities: ["Validate predictive infrastructure degradation and monitoring models.", "Direct the formatting and precision of automated infrastructure risk reports.", "Ensure alignment with civil engineering and global asset management standards.", "Facilitate strategic connections with sovereign and private infrastructure operators."],
+        standards: ["ISO 55001 Asset Management Systems", "American Society of Civil Engineers (ASCE) infrastructure reporting standards"],
+        background: ["Senior Civil Engineer with a focus on large-scale infrastructure.", "Specialist in structural risk assessment and catastrophic failure modeling.", "Expert in Smart City and urban resilience architecture.", "Executive tenure at premier global engineering firms such as AECOM, Bechtel, or Jacobs."],
+        time: "3–5 hours per month",
+        comp: "0.5% equity (Advisor Shares)"
+      },
+      {
+        title: "Defense & Security Advisor",
+        domain: "Geospatial Intelligence & National Security",
+        mission: "Provide high-level operational guidance for the Xeltis Sovereign Defense engine. You will ensure our geospatial intelligence outputs, threat monitoring, and operational dashboards meet the stringent, classified standards required by the defense and intelligence communities.",
+        responsibilities: ["Audit and validate automated geospatial intelligence and reconnaissance methodologies.", "Lead strategic engagement with international defense sectors and ministries.", "Ensure strict technical interoperability with global defense network standards.", "Provide actionable, strategic foresight on future national security applications."],
+        standards: ["NATO STANAG (Standardization Agreements) interoperability frameworks", "NIST cybersecurity and data handling standards"],
+        background: ["Former high-ranking Intelligence Officer or Defense Attaché.", "Senior Military Geospatial Analyst with extensive theater experience.", "National Security Strategist with top-level clearance history.", "Service history within organizations such as NATO, NGA, or national equivalents."],
+        time: "3 hours per month",
+        comp: "0.5% – 1% equity (Advisor Shares)"
+      },
+      {
+        title: "Disaster & Humanitarian Advisor",
+        domain: "Disaster Response & Humanitarian Coordination",
+        mission: "Oversee the integrity and deployment of Xeltis Disaster Intelligence. Your guidance will ensure our real-time crisis mapping and damage assessment algorithms provide accurate, operationally vital intelligence directly to first responders and international NGOs.",
+        responsibilities: ["Validate real-time disaster and crisis assessment algorithms.", "Ensure platform outputs comply strictly with international humanitarian standards.", "Support high-level engagement with global NGOs and national governments.", "Guide the development of predictive humanitarian logistics and supply chain models."],
+        standards: ["UN OCHA Multi-Sector Initial Rapid Assessment (MIRA) methodology", "The Sphere Handbook humanitarian standards"],
+        background: ["Senior Disaster Risk Reduction specialist.", "Expert in complex humanitarian logistics and crisis supply chains.", "Former international Emergency Response Coordinator.", "Operational leadership experience at UN OCHA, IFRC, or equivalent agencies."],
+        time: "3 hours per month",
+        comp: "0.25% – 0.75% equity (Advisor Shares)"
+      },
+      {
+        title: "Operations & Industrial Systems",
+        domain: "Industrial Operations & Asset Monitoring",
+        mission: "Direct the development of the Xeltis Operations Hub. You will ensure that our global telemetry analytics, supply chain tracking, and industrial monitoring tools perfectly align with modern, large-scale asset management practices.",
+        responsibilities: ["Validate heavy-asset telemetry and operational downtime predictive features.", "Broker strategic technology partnerships within the global industrial sector.", "Guide the development of automated fleet and site productivity analytics.", "Align software outputs with enterprise-level operational management frameworks."],
+        standards: ["ISO 55000 Asset Management framework family", "International industrial maintenance and reliability best practices"],
+        background: ["C-Suite or VP-level Industrial Operations Executive.", "Former Regional Operations Manager for Tier-1 mining or heavy industry.", "Expert in autonomous logistics and complex industrial systems integration.", "Executive experience at heavy machinery conglomerates like Caterpillar, Komatsu, or Sandvik."],
+        time: "2–3 hours per month",
+        comp: "0.25% – 0.5% equity (Advisor Shares)"
+      }
+    ];
+
+    let currentSelectedJob = null;
+
+    function renderJobs(filteredJobs) {
+      const container = document.getElementById('jobsContainer');
+      container.innerHTML = '';
+      filteredJobs.forEach((job) => {
+        const originalIndex = jobsData.indexOf(job);
+        container.innerHTML += `
+          <div class="job-card" onclick="openDetailsModal(${originalIndex})">
+            <p style="color: #FFC107; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${job.domain}</p>
+            <h3 style="margin: 15px 0; font-size: 1.4rem; font-family: 'Space Grotesk';">${job.title}</h3>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">Time: ${job.time}</p>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 25px;">Equity: ${job.comp}</p>
+            <span style="color: #fff; font-size: 0.9rem; text-decoration: underline;">Read Full Description &rarr;</span>
+          </div>
+        `;
+      });
+    }
+
+    function filterJobs() {
+      const searchTerm = document.getElementById('jobSearch').value.toLowerCase();
+      const domainTerm = document.getElementById('domainFilter').value;
+
+      const filtered = jobsData.filter(job => {
+        const matchesSearch = job.title.toLowerCase().includes(searchTerm) || job.domain.toLowerCase().includes(searchTerm);
+
+        let matchesDomain = domainTerm === 'all';
+        if (domainTerm === 'Mineral') matchesDomain = job.domain.includes('Mineral');
+        else if (domainTerm === 'Carbon') matchesDomain = job.domain.includes('Carbon');
+        else if (domainTerm === 'Infrastructure') matchesDomain = job.domain.includes('Infrastructure');
+        else if (domainTerm === 'Defense') matchesDomain = job.domain.includes('Geospatial') || job.title.includes('Defense');
+        else if (domainTerm === 'Disaster') matchesDomain = job.domain.includes('Disaster');
+        else if (domainTerm === 'Operations') matchesDomain = job.domain.includes('Industrial') || job.domain.includes('Operations');
+
+        return matchesSearch && matchesDomain;
+      });
+
+      renderJobs(filtered);
+    }
+
+    window.openDetailsModal = function(index) {
+      currentSelectedJob = jobsData[index];
+      document.getElementById('detailDomain').innerText = currentSelectedJob.domain;
+      document.getElementById('detailTitle').innerText = currentSelectedJob.title;
+      document.getElementById('detailTime').innerText = currentSelectedJob.time;
+      document.getElementById('detailComp').innerText = currentSelectedJob.comp;
+      document.getElementById('detailMission').innerText = currentSelectedJob.mission;
+
+      document.getElementById('detailResponsibilities').innerHTML = currentSelectedJob.responsibilities.map(r => `<li>${r}</li>`).join('');
+      document.getElementById('detailStandards').innerHTML = currentSelectedJob.standards.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('detailBackground').innerHTML = currentSelectedJob.background.map(b => `<li>${b}</li>`).join('');
+
+      document.getElementById('jobDetailsModal').style.display = 'flex';
+    }
+
+    window.closeDetailsModal = function() {
+      document.getElementById('jobDetailsModal').style.display = 'none';
+    }
+
+    window.openApplyModal = function() {
+      closeDetailsModal();
+      document.getElementById('applyRoleName').innerText = currentSelectedJob.title;
+      document.getElementById('applyModal').style.display = 'flex';
+      document.getElementById('aiResult').innerText = "";
+      document.getElementById('cvFile').value = "";
+      document.getElementById('submitCvBtn').style.display = 'block';
+    }
+
+    window.closeApplyModal = function() {
+      document.getElementById('applyModal').style.display = 'none';
+    }
+
+    // Modern, humble, and elegant AI application submission logic
+    window.submitApplication = async function() {
+      const fileInput = document.getElementById('cvFile');
+      if (!fileInput.files[0]) {
+        return alert("Please select a PDF or Word document (.doc / .docx) first.");
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+      formData.append('role', currentSelectedJob.title);
+
+      document.getElementById('submitCvBtn').style.display = 'none';
+      document.getElementById('aiLoading').style.display = 'block';
+      const resultDiv = document.getElementById('aiResult');
+      resultDiv.innerText = "";
+      resultDiv.style.color = "";
+
+      try {
+        const response = await fetch('http://localhost:5001/api/apply', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error("Backend error – make sure app.py is running on port 5001");
+
+        const data = await response.json();
+
+        // Elegant Footer for all responses
+        const commonFooter = `
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #888; line-height: 1.6; text-align: left;">
+            We invite you to experience our Earth Intelligence platform at <a href="https://app.xeltis.org" target="_blank" style="color: #FFC107; text-decoration: none; font-weight: bold;">app.xeltis.org</a>.<br><br>
+            If you have any questions, requests, or feel this AI assessment missed a key detail, our team is always here for you. Reach out directly at <a href="mailto:sapiens@xeltis.org" style="color: #FFC107; text-decoration: none; font-weight: bold;">sapiens@xeltis.org</a>.
+          </div>
+        `;
+
+        if (data.decision === "ACCEPT") {
+          resultDiv.innerHTML = `
+            <div style="font-size: 1.2rem; margin-bottom: 10px; color: #00E676; text-align: left;">✅ <strong>Profile Successfully Reviewed</strong></div>
+            <div style="color: #ccc; font-size: 0.95rem; font-weight: normal; line-height: 1.6; text-align: left;">
+              Thank you for sharing your journey with us. Your background aligns wonderfully with our mission requirements. Our executive team has been notified and will be in touch with you shortly.
+            </div>
+            ${commonFooter}
+          `;
+        } else {
+          let title = "Thank you for your interest.";
+          let explanation = "While your background is genuinely impressive, our AI determined it may not perfectly align with the highly specific criteria for this particular advisory role at this time.";
+          
+          if (data.reason && data.reason.includes("already submitted")) {
+             title = "Profile Already Received";
+             explanation = "It looks like we already have your application safely stored in our system! We are currently reviewing it.";
+          } else {
+             explanation += `<br><br><span style="color:#aaa;"><strong>Feedback:</strong> ${data.reason}</span>`;
+          }
+
+          resultDiv.innerHTML = `
+            <div style="font-size: 1.2rem; margin-bottom: 10px; color: #fff; text-align: left;">✨ <strong>${title}</strong></div>
+            <div style="color: #ccc; font-size: 0.95rem; font-weight: normal; line-height: 1.6; text-align: left;">
+              ${explanation}
+            </div>
+            ${commonFooter}
+          `;
+        }
+      } catch (error) {
+        console.error("Submission Error:", error);
+        resultDiv.style.color = "red";
+        resultDiv.innerText = "System error: " + error.message + "\n\nMake sure 'python app.py' is running.";
+      } finally {
+        document.getElementById('aiLoading').style.display = 'none';
+        document.getElementById('submitCvBtn').style.display = 'block';
+      }
+    };
+
+    // Initial render
+    renderJobs(jobsData);
+  </script>
   <script type="module" src="/src/script.js"></script>
 </body>
 </html>

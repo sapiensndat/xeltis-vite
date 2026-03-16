@@ -28,3 +28,4 @@ dist-ssr
 Nova7_Mining/
 .vercel
 public/videos/*.mp4
+.env
