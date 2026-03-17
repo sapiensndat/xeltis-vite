@@ -52,8 +52,13 @@ View details in the Supabase Dashboard.
     except Exception as e:
         logging.error(f"❌ Zoho email error: {e}")
 
-@app.route('/api/apply', methods=['POST'])
+@app.route('/api/apply', methods=['POST', 'GET'])
 def apply():
+    # --- BROWSER HEALTH CHECK ---
+    if request.method == 'GET':
+        return jsonify({"status": "Xeltis AI API is active, secure, and listening for CVs."}), 200
+
+    # --- AI REVIEW LOGIC ---
     try:
         if 'file' not in request.files:
             return jsonify({"error": "No file uploaded"}), 400
