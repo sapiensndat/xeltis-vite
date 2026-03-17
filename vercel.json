@@ -1,4 +1,4 @@
-echo '{
+{
   "cleanUrls": true,
   "rewrites": [
     {
@@ -6,4 +6,4 @@ echo '{
       "destination": "/api/index.py"
     }
   ]
-}' > vercel.json
+}
