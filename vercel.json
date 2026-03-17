@@ -1,13 +1,7 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    }
-  ],
   "functions": {
-    "api/index.py": {
+    "api/**/*.py": {
       "excludeFiles": "{node_modules/**,videos/**,dist/**,images/**,public/**}"
     }
   }
