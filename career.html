@@ -255,12 +255,10 @@
   </footer>
 
   <script>
-    // Fix GSAP warning
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
     }
 
-    // Full detailed jobs data
     const jobsData = [
       {
         title: "Mining Intelligence Advisor",
@@ -396,7 +394,6 @@
       document.getElementById('applyModal').style.display = 'none';
     }
 
-    // Modern, humble, and elegant AI application submission logic
     window.submitApplication = async function() {
       const fileInput = document.getElementById('cvFile');
       if (!fileInput.files[0]) {
@@ -419,11 +416,14 @@
           body: formData
         });
 
-        if (!response.ok) throw new Error("Backend error – make sure app.py is running on port 5001");
+        // FIXED ERROR HANDLING: This will now show the REAL error from Vercel!
+        if (!response.ok) {
+           const errText = await response.text();
+           throw new Error(`Server Error (${response.status}): The Python code crashed on Vercel.`);
+        }
 
         const data = await response.json();
 
-        // Elegant Footer for all responses
         const commonFooter = `
           <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #888; line-height: 1.6; text-align: left;">
             We invite you to experience our Earth Intelligence platform at <a href="https://app.xeltis.org" target="_blank" style="color: #FFC107; text-decoration: none; font-weight: bold;">app.xeltis.org</a>.<br><br>
@@ -461,14 +461,14 @@
       } catch (error) {
         console.error("Submission Error:", error);
         resultDiv.style.color = "red";
-        resultDiv.innerText = "System error: " + error.message + "\n\nMake sure 'python app.py' is running.";
+        // Shows the clean error to the user
+        resultDiv.innerText = error.message + "\n\nPlease check your Vercel Logs to see why Python failed.";
       } finally {
         document.getElementById('aiLoading').style.display = 'none';
         document.getElementById('submitCvBtn').style.display = 'block';
       }
     };
 
-    // Initial render
     renderJobs(jobsData);
   </script>
   <script type="module" src="/src/script.js"></script>
