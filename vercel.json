@@ -1,14 +1,9 @@
-{
+echo '{
   "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/index.py"
     }
-  ],
-  "functions": {
-    "api/index.py": {
-      "excludeFiles": "{node_modules/**,videos/**,images/**,dist/**,src/**}"
-    }
-  }
-}
+  ]
+}' > vercel.json
