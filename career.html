@@ -17,6 +17,11 @@
     .projects span a:hover { text-decoration: none; }
     .job-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,193,7,0.2); transition: 0.3s; cursor: pointer; }
     .job-card:hover { border-color: #FFC107; background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+    
+    /* Special styling for Community Network Card */
+    .community-card { border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05); }
+    .community-card:hover { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; overflow-y: auto; padding: 20px; }
     .modal-content { background: #111; border: 1px solid #FFC107; padding: 40px; border-radius: 20px; width: 100%; max-width: 800px; text-align: left; position: relative; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     .modal-close { position: absolute; top: 20px; right: 25px; background: none; color: white; border: none; font-size: 30px; cursor: pointer; transition: 0.2s; }
@@ -122,7 +127,7 @@
 
   <section class="career-header">
     <h1>FIND YOUR FUTURE</h1>
-    <p>XELTIS is actively forming an elite Advisory Council. We are looking for world-class talent to tackle challenging projects that will fundamentally reshape sovereign intelligence, resource extraction, and global monitoring.</p>
+    <p>XELTIS is actively forming an elite Advisory Council and Intelligence Network. We are looking for world-class talent to tackle challenging projects that will fundamentally reshape sovereign intelligence, resource extraction, and global monitoring.</p>
   </section>
 
   <section class="career">
@@ -165,12 +170,16 @@
   </section>
 
   <section class="jobs-list" style="padding: 50px 10%; max-width: 1400px; margin: 0 auto;">
-    <h2 style="letter-spacing: 5px; color: #FFC107; text-align: center; margin-bottom: 50px;">ADVISORY COUNCIL OPENINGS</h2>
+    <h2 style="letter-spacing: 5px; color: #FFC107; text-align: center; margin-bottom: 20px;">ADVISORY COUNCIL & NETWORK</h2>
+    <p style="text-align: center; color: #888; max-width: 800px; margin: 0 auto 50px auto; line-height: 1.6;">
+        Join our elite strategic ecosystem. Whether you are looking for a specific advisory role or want to join our restricted Intelligence Network, our AI will evaluate your background for the perfect fit.
+    </p>
     
     <div class="filter-container">
       <input type="text" id="jobSearch" class="search-bar" placeholder="Search by title or keyword..." onkeyup="filterJobs()">
       <select id="domainFilter" class="filter-select" onchange="filterJobs()">
         <option value="all">All Domains</option>
+        <option value="Intelligence">Intelligence Network (Community)</option>
         <option value="Mineral">Mineral Exploration</option>
         <option value="Carbon">Sustainability & ESG</option>
         <option value="Infrastructure">Infrastructure</option>
@@ -185,41 +194,41 @@
   </section>
 
   <div id="jobDetailsModal" class="modal-overlay">
-    <div class="modal-content" style="max-width: 900px; padding: 50px; border: 1px solid rgba(255, 193, 7, 0.3); background: #0a0a0a; box-shadow: 0 0 40px rgba(0,0,0,0.9);">
+    <div id="modalContentBox" class="modal-content" style="max-width: 900px; padding: 50px; border: 1px solid rgba(255, 193, 7, 0.3); background: #0a0a0a; box-shadow: 0 0 40px rgba(0,0,0,0.9);">
       <button class="modal-close" onclick="closeDetailsModal()" style="top: 25px; right: 30px;">&times;</button>
 
-      <div style="border-bottom: 1px solid rgba(255,193,7,0.2); padding-bottom: 25px; margin-bottom: 35px;">
+      <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 35px;">
           <p id="detailDomain" style="color: #FFC107; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px;"></p>
           <h2 id="detailTitle" style="font-size: 2.8rem; font-family: 'Space Grotesk'; margin-bottom: 20px; line-height: 1.1;"></h2>
 
           <div style="display: flex; gap: 40px; font-size: 0.95rem;">
             <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Time Commitment</strong> <span id="detailTime" style="color:#fff; font-weight: bold;"></span></div>
-            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Compensation</strong> <span id="detailComp" style="color:#FFC107; font-weight: bold;"></span></div>
-            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Clearance Level</strong> <span style="color:#fff; font-weight: bold;">Executive Advisory</span></div>
+            <div><strong id="detailCompLabel" style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Compensation</strong> <span id="detailComp" style="color:#FFC107; font-weight: bold;"></span></div>
+            <div><strong style="display:block; font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;">Clearance Level</strong> <span id="detailClearance" style="color:#fff; font-weight: bold;">Executive Advisory</span></div>
           </div>
       </div>
 
-      <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Mission Objective</h3>
+      <h3 id="missionHeader" style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Mission Objective</h3>
       <p id="detailMission" style="color: #ddd; margin-bottom: 40px; line-height: 1.8; font-size: 1.05rem;"></p>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
           <div>
-              <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Strategic Responsibilities</h3>
+              <h3 id="responsibilitiesHeader" style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Strategic Responsibilities</h3>
               <ul id="detailResponsibilities" class="modal-list" style="margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ccc;"></ul>
           </div>
           <div>
-              <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Regulatory & Industry Standards</h3>
+              <h3 id="standardsHeader" style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Regulatory & Industry Standards</h3>
               <ul id="detailStandards" class="modal-list" style="margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ccc;"></ul>
           </div>
       </div>
 
-      <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 10px; border-left: 4px solid #FFC107; margin-bottom: 40px;">
-          <h3 style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Ideal Candidate Background</h3>
+      <div id="backgroundBox" style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 10px; border-left: 4px solid #FFC107; margin-bottom: 40px;">
+          <h3 id="backgroundHeader" style="color: #FFC107; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;">Ideal Candidate Background</h3>
           <ul id="detailBackground" class="modal-list" style="margin-bottom: 0; margin-left: 0; padding-left: 20px; line-height: 1.7; color: #ddd;"></ul>
       </div>
 
       <div style="text-align: right; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-        <button onclick="openApplyModal()" class="discover-btn" style="padding: 15px 40px; font-size: 1rem; font-weight: bold; background: #FFC107; color: #000; border: none; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk';">Submit Candidacy &rarr;</button>
+        <button id="modalApplyBtn" onclick="openApplyModal()" class="discover-btn" style="padding: 15px 40px; font-size: 1rem; font-weight: bold; background: #FFC107; color: #000; border: none; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk';">Submit Candidacy &rarr;</button>
       </div>
     </div>
   </div>
@@ -260,6 +269,32 @@
     }
 
     const jobsData = [
+      {
+        title: "Xeltis Intelligence Network Member",
+        domain: "Cross-Domain Intelligence & Strategy",
+        isCommunity: true,
+        mission: "The Xeltis Intelligence Network is a semi-closed, high-value ecosystem designed to position Xeltis as the central hub for Earth Observation (EO) insights. As a member, you will act as a strategic node, validating predictive analytics and identifying emerging opportunities in mining, climate, infrastructure, and urban resilience before they reach the general market.",
+        responsibilities: [
+          "Contribute to the validation of high-value geospatial datasets.",
+          "Participate in closed-door monthly intelligence briefings.",
+          "Identify strategic 'first-look' opportunities within your specific industry domain.",
+          "Provide feedback on pre-release predictive models and tactical tools.",
+          "Collaborate with other hand-picked professionals to bridge the gap between EO data and operational action."
+        ],
+        standards: [
+          "Institutional-grade Data Integrity",
+          "Cross-Sector Strategic Compliance",
+          "High-Level Confidentiality Protocols"
+        ],
+        background: [
+          "Professional background in Mining, Carbon Markets, Civil Engineering, or National Security.",
+          "Experience in Geospatial Data Analysis or Predictive Risk Modeling.",
+          "Strategic Decision-Makers, Investors, or Operators looking for first-mover advantage.",
+          "Ability to translate complex Earth Intelligence into actionable business logic."
+        ],
+        time: "Flexible / Insight-driven",
+        comp: "Priority Access to Intelligence & Networking"
+      },
       {
         title: "Mining Intelligence Advisor",
         domain: "Mineral Exploration & Resource Modeling",
@@ -329,13 +364,17 @@
       container.innerHTML = '';
       filteredJobs.forEach((job) => {
         const originalIndex = jobsData.indexOf(job);
+        const cardClass = job.isCommunity ? 'job-card community-card' : 'job-card';
+        const topColor = job.isCommunity ? '#10b981' : '#FFC107';
+        const actionText = job.isCommunity ? 'Apply to Join Network &rarr;' : 'Read Full Description &rarr;';
+        
         container.innerHTML += `
-          <div class="job-card" onclick="openDetailsModal(${originalIndex})">
-            <p style="color: #FFC107; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${job.domain}</p>
+          <div class="${cardClass}" onclick="openDetailsModal(${originalIndex})">
+            <p style="color: ${topColor}; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${job.domain}</p>
             <h3 style="margin: 15px 0; font-size: 1.4rem; font-family: 'Space Grotesk';">${job.title}</h3>
             <p style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">Time: ${job.time}</p>
-            <p style="color: #888; font-size: 0.9rem; margin-bottom: 25px;">Equity: ${job.comp}</p>
-            <span style="color: #fff; font-size: 0.9rem; text-decoration: underline;">Read Full Description &rarr;</span>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 25px;">${job.isCommunity ? 'Access' : 'Equity'}: ${job.comp}</p>
+            <span style="color: #fff; font-size: 0.9rem; text-decoration: underline;">${actionText}</span>
           </div>
         `;
       });
@@ -349,7 +388,8 @@
         const matchesSearch = job.title.toLowerCase().includes(searchTerm) || job.domain.toLowerCase().includes(searchTerm);
 
         let matchesDomain = domainTerm === 'all';
-        if (domainTerm === 'Mineral') matchesDomain = job.domain.includes('Mineral');
+        if (domainTerm === 'Intelligence') matchesDomain = job.domain.includes('Intelligence') || job.isCommunity;
+        else if (domainTerm === 'Mineral') matchesDomain = job.domain.includes('Mineral');
         else if (domainTerm === 'Carbon') matchesDomain = job.domain.includes('Carbon');
         else if (domainTerm === 'Infrastructure') matchesDomain = job.domain.includes('Infrastructure');
         else if (domainTerm === 'Defense') matchesDomain = job.domain.includes('Geospatial') || job.title.includes('Defense');
@@ -364,15 +404,36 @@
 
     window.openDetailsModal = function(index) {
       currentSelectedJob = jobsData[index];
+      
+      const themeColor = currentSelectedJob.isCommunity ? '#10b981' : '#FFC107';
+      const borderTheme = `1px solid rgba(${currentSelectedJob.isCommunity ? '16, 185, 129' : '255, 193, 7'}, 0.3)`;
+
+      document.getElementById('modalContentBox').style.border = borderTheme;
+      document.getElementById('detailDomain').style.color = themeColor;
+      document.getElementById('detailComp').style.color = themeColor;
+      document.getElementById('missionHeader').style.color = themeColor;
+      document.getElementById('responsibilitiesHeader').style.color = themeColor;
+      document.getElementById('standardsHeader').style.color = themeColor;
+      document.getElementById('backgroundHeader').style.color = themeColor;
+      document.getElementById('backgroundBox').style.borderLeft = `4px solid ${themeColor}`;
+      
       document.getElementById('detailDomain').innerText = currentSelectedJob.domain;
       document.getElementById('detailTitle').innerText = currentSelectedJob.title;
       document.getElementById('detailTime').innerText = currentSelectedJob.time;
+      
+      document.getElementById('detailCompLabel').innerText = currentSelectedJob.isCommunity ? "Access" : "Compensation";
       document.getElementById('detailComp').innerText = currentSelectedJob.comp;
+      document.getElementById('detailClearance').innerText = currentSelectedJob.isCommunity ? "Strategic Network" : "Executive Advisory";
+
       document.getElementById('detailMission').innerText = currentSelectedJob.mission;
 
       document.getElementById('detailResponsibilities').innerHTML = currentSelectedJob.responsibilities.map(r => `<li>${r}</li>`).join('');
       document.getElementById('detailStandards').innerHTML = currentSelectedJob.standards.map(s => `<li>${s}</li>`).join('');
       document.getElementById('detailBackground').innerHTML = currentSelectedJob.background.map(b => `<li>${b}</li>`).join('');
+
+      const applyBtn = document.getElementById('modalApplyBtn');
+      applyBtn.style.background = themeColor;
+      applyBtn.innerText = currentSelectedJob.isCommunity ? "Request Network Access \u2192" : "Submit Candidacy \u2192";
 
       document.getElementById('jobDetailsModal').style.display = 'flex';
     }
@@ -416,7 +477,6 @@
           body: formData
         });
 
-        // FIXED ERROR HANDLING: This will now show the REAL error from Vercel!
         if (!response.ok) {
            const errText = await response.text();
            throw new Error(`Server Error (${response.status}): The Python code crashed on Vercel.`);
@@ -441,7 +501,7 @@
           `;
         } else {
           let title = "Thank you for your interest.";
-          let explanation = "While your background is genuinely impressive, our AI determined it may not perfectly align with the highly specific criteria for this particular advisory role at this time.";
+          let explanation = "While your background is genuinely impressive, our AI determined it may not perfectly align with the highly specific criteria for this particular role at this time.";
           
           if (data.reason && data.reason.includes("already submitted")) {
              title = "Profile Already Received";
@@ -461,7 +521,6 @@
       } catch (error) {
         console.error("Submission Error:", error);
         resultDiv.style.color = "red";
-        // Shows the clean error to the user
         resultDiv.innerText = error.message + "\n\nPlease check your Vercel Logs to see why Python failed.";
       } finally {
         document.getElementById('aiLoading').style.display = 'none';
