@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="XELTIS LTD - Latest updates and news">
-  <title>Updates | XELTIS LTD</title>
+  
+  <meta property="og:title" content="Updates | XELTIS LTD" id="metaOgTitle">
+  <meta property="og:description" content="Stay updated with the latest Earth Intelligence reports from XELTIS.">
+  <title id="pageTitle">Updates | XELTIS LTD</title>
+  
   <link rel="icon" type="image/png" href="/images/xeltis-logo.png">
   <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
@@ -14,19 +18,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    /* Existing Styles */
+    /* Existing Core Styles */
     .projects span a { color: inherit; text-decoration: none; }
     .projects span a:hover { text-decoration: none; }
     
-    .featured-article {
-      grid-column: 1 / -1;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,193,7,0.3);
-      border-radius: 20px;
-      padding: 50px;
-      text-align: left;
-      margin-bottom: 40px;
-    }
+    .featured-article { grid-column: 1 / -1; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,193,7,0.3); border-radius: 20px; padding: 50px; text-align: left; margin-bottom: 40px; }
     .featured-article img.article-hero { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
     .featured-article h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; color: #FFC107; margin-bottom: 10px; line-height: 1.2; }
     .featured-article h3 { font-size: 1.2rem; color: #fff; margin-bottom: 20px; font-weight: 400; letter-spacing: 1px; }
@@ -38,46 +34,79 @@
     .featured-article a { color: #FFC107; text-decoration: none; font-weight: bold; transition: 0.2s; }
     .featured-article a:hover { text-decoration: underline; color: #fff; }
 
-    /* New Dynamic News Styles */
+    /* Controls */
     .news-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px; flex-wrap: wrap; }
-    .news-search { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; outline: none; }
-    .news-search:focus { border-color: #FFC107; }
+    .news-search { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
+    .news-search:focus { border-color: #FFC107; box-shadow: 0 0 15px rgba(255,193,7,0.2); }
     .btn-submit-news { background: #FFC107; color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
-    .btn-submit-news:hover { background: #fff; transform: translateY(-2px); }
+    .btn-submit-news:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,193,7,0.3); }
 
+    /* Dynamic Grid & Cards */
     .dynamic-news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-    .dynamic-news-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 25px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
-    .dynamic-news-card:hover { border-color: #FFC107; transform: translateY(-5px); background: rgba(255,255,255,0.05); }
-    .dynamic-news-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
-    .dynamic-news-card .tag { font-size: 0.75rem; background: rgba(255,193,7,0.1); color: #FFC107; padding: 5px 10px; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(255,193,7,0.3); }
-    .dynamic-news-card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif; }
-    .dynamic-news-card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .dynamic-news-card .date { color: #666; font-size: 0.85rem; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
-
-    /* Modals */
-    .xeltis-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 9999; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
-    .xeltis-modal.active { display: flex; opacity: 1; }
-    .modal-content { background: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; }
-    .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
-    .modal-close:hover { background: #FFC107; color: #000; }
+    .dynamic-news-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 25px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .dynamic-news-card:hover { border-color: #FFC107; transform: translateY(-5px); background: rgba(255,255,255,0.04); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     
-    /* View Article Modal Specifics */
-    .article-modal-img { width: 100%; height: 350px; object-fit: cover; }
-    .article-modal-body { padding: 40px; }
-    .article-modal-title { font-size: 2.5rem; color: #FFC107; font-family: 'Space Grotesk', sans-serif; margin: 15px 0 25px 0; }
-    .article-modal-content { color: #ccc; line-height: 1.8; font-size: 1.1rem; }
+    /* Highlight the very first latest dynamic news item */
+    .dynamic-news-card.latest-highlight { grid-column: span 2; }
+    @media (max-width: 768px) { .dynamic-news-card.latest-highlight { grid-column: span 1; } }
+
+    .dynamic-news-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
+    .dynamic-news-card.latest-highlight img { height: 300px; }
+    .dynamic-news-card .tag { font-size: 0.75rem; background: rgba(255,193,7,0.1); color: #FFC107; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(255,193,7,0.2); letter-spacing: 1px; text-transform: uppercase; }
+    .dynamic-news-card h3 { color: #fff; font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif; line-height: 1.3; transition: color 0.2s; }
+    .dynamic-news-card:hover h3 { color: #FFC107; }
+    .dynamic-news-card p { color: #aaa; font-size: 1rem; line-height: 1.6; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .dynamic-news-card .date { color: #666; font-size: 0.85rem; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Sleek Modals */
+    .xeltis-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 9999; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+    .xeltis-modal.active { display: flex; opacity: 1; }
+    .modal-content { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+    .modal-content::-webkit-scrollbar { width: 8px; }
+    .modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    
+    .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 20; transition: all 0.2s; }
+    .modal-close:hover { background: #FFC107; color: #000; border-color: #FFC107; transform: scale(1.1); }
+    
+    /* View Article Modal Specifics - Cinematic Look */
+    .article-modal-header { position: relative; width: 100%; height: 450px; background: #111; }
+    .article-modal-header img { width: 100%; height: 100%; object-fit: cover; border-top-left-radius: 24px; border-top-right-radius: 24px; }
+    .article-modal-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.8) 40%, transparent 100%); pointer-events: none; }
+    
+    .article-modal-body { padding: 0 50px 50px 50px; position: relative; z-index: 2; margin-top: -60px; }
+    
+    .article-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
+    .article-meta-info { display: flex; align-items: center; gap: 15px; color: #888; font-size: 0.95rem; }
+    
+    /* Share Button */
+    .share-btn { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; transition: all 0.2s; font-family: 'Roboto', sans-serif; }
+    .share-btn:hover { background: rgba(255,193,7,0.1); color: #FFC107; border-color: #FFC107; }
+    .share-btn svg { width: 16px; height: 16px; }
+
+    .article-modal-title { font-size: 3rem; color: #fff; font-family: 'Space Grotesk', sans-serif; line-height: 1.1; margin: 10px 0 30px 0; letter-spacing: -0.5px; }
+    
+    .article-modal-content { color: #d1d1d1; line-height: 1.9; font-size: 1.15rem; font-family: 'Roboto', sans-serif; }
+    .article-modal-content p { margin-bottom: 1.5em; }
+    .article-modal-content strong { color: #fff; }
 
     /* Form Specifics */
-    .form-container { padding: 40px; }
-    .form-container h2 { color: #FFC107; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 10px; }
-    .form-container p { color: #888; margin-bottom: 30px; }
+    .form-container { padding: 50px; }
+    .form-container h2 { color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .form-container p { color: #888; margin-bottom: 40px; font-size: 1.1rem; }
     .form-group { margin-bottom: 25px; }
-    .form-group label { display: block; color: #ccc; margin-bottom: 10px; font-weight: bold; font-size: 0.9rem; }
-    .form-group input, .form-group textarea { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
-    .form-group input:focus, .form-group textarea:focus { border-color: #FFC107; outline: none; }
-    .file-drop { border: 2px dashed rgba(255,255,255,0.2); padding: 30px; text-align: center; border-radius: 10px; cursor: pointer; color: #888; transition: 0.2s; position: relative; }
-    .file-drop:hover { border-color: #FFC107; color: #fff; }
+    .form-group label { display: block; color: #ccc; margin-bottom: 10px; font-weight: bold; font-size: 0.95rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; font-family: inherit; box-sizing: border-box; font-size: 1rem; transition: 0.3s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: #FFC107; background: rgba(255,255,255,0.05); outline: none; }
+    .file-drop { border: 2px dashed rgba(255,255,255,0.15); padding: 40px; text-align: center; border-radius: 12px; cursor: pointer; color: #888; transition: 0.3s; position: relative; background: rgba(255,255,255,0.01); }
+    .file-drop:hover { border-color: #FFC107; color: #fff; background: rgba(255,193,7,0.05); }
     .file-drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    
+    @media (max-width: 768px) {
+      .article-modal-header { height: 250px; }
+      .article-modal-title { font-size: 2rem; }
+      .article-modal-body { padding: 0 25px 25px 25px; margin-top: -30px; }
+      .form-container { padding: 30px 20px; }
+    }
   </style>
 </head>
 <body class="updates-page">
@@ -131,10 +160,10 @@
         <h2>Xeltis Named Among Top 10 Champions at Mining Indaba 2026</h2>
         <h3>A New Era of Earth Intelligence for Responsible Mining</h3>
         <div class="article-meta">Published on March 16, 2026 | Global Communications | <a href="https://miningindaba.com/" target="_blank">Mining Indaba</a></div>
-        <p>The global mining industry is entering a transformative era...</p>
-        <div style="margin-top: 40px; padding: 30px; background: rgba(255,193,7,0.05); border-radius: 10px; border: 1px solid rgba(255,193,7,0.2);">
+        <p>The global mining industry is entering a transformative era—one where technology, sustainability, and community engagement must evolve together. Against this backdrop, Xeltis has been recognized as one of the Top 10 Champions at Investing in African Mining Indaba 2026.</p>
+        <div style="margin-top: 40px; padding: 30px; background: rgba(255,193,7,0.05); border-radius: 12px; border: 1px solid rgba(255,193,7,0.2);">
           <h4 style="margin-top: 0;">About Xeltis</h4>
-          <p style="margin-bottom: 0;">Xeltis is an Earth Intelligence Platform... <a href="https://app.xeltis.org" target="_blank">Access the Platform &rarr;</a></p>
+          <p style="margin-bottom: 0;">Xeltis is an Earth Intelligence Platform designed to help organizations understand the planet’s resources. <a href="https://app.xeltis.org" target="_blank">Access the Platform &rarr;</a></p>
         </div>
       </div>
     </div>
@@ -145,14 +174,14 @@
     </div>
 
     <div id="dynamicNewsContainer" class="dynamic-news-grid">
-      <p style="color: #888; text-align: center; grid-column: 1/-1; padding: 40px;">Initializing uplink... fetching latest records.</p>
+      <p style="color: #888; text-align: center; grid-column: 1/-1; padding: 40px; font-family: 'Space Grotesk', sans-serif;">Initializing uplink... fetching latest records.</p>
     </div>
 
   </section>
 
   <div id="articleModal" class="xeltis-modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModals()">×</button>
+      <button class="modal-close" aria-label="Close" onclick="closeModals()">×</button>
       <div id="articleModalContent">
         </div>
     </div>
@@ -160,10 +189,10 @@
 
   <div id="submitModal" class="xeltis-modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModals()">×</button>
+      <button class="modal-close" aria-label="Close" onclick="closeModals()">×</button>
       <div class="form-container">
         <h2>Transmit an Update</h2>
-        <p>Submit intelligence reports for the Xeltis Platform. Submissions enter a pending review state.</p>
+        <p>Submit intelligence reports for the Xeltis Platform. Submissions enter a pending review state before broadcasting.</p>
         
         <form id="newsForm" onsubmit="handleNewsSubmit(event)">
           <input type="hidden" id="formCategory" value="Xeltis">
@@ -181,6 +210,8 @@
           <div class="form-group">
             <label>Cover Telemetry (Image)</label>
             <div class="file-drop">
+              <svg style="margin-bottom: 10px;" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <br>
               <span id="fileNameDisplay">Click or drop a high-quality image file here</span>
               <input type="file" id="formImage" accept="image/*" onchange="document.getElementById('fileNameDisplay').innerText = this.files[0] ? this.files[0].name : 'Click or drop a high-quality image file here'">
             </div>
@@ -191,12 +222,13 @@
             <textarea id="formContent" rows="8" required placeholder="Write your full report here. Paragraph breaks will be preserved..."></textarea>
           </div>
 
-          <button type="submit" id="submitBtn" class="btn-submit-news" style="width: 100%;">Submit for Review</button>
+          <button type="submit" id="submitBtn" class="btn-submit-news" style="width: 100%; font-size: 1.1rem; padding: 20px;">Submit for Clearance</button>
         </form>
         
-        <div id="successMessage" style="display: none; text-align: center; padding: 40px 0;">
-          <h3 style="color: #4CAF50; font-size: 2rem; margin-bottom: 10px;">Transmission Received.</h3>
-          <p style="color: #aaa;">Your article is securely uploaded and pending clearance.</p>
+        <div id="successMessage" style="display: none; text-align: center; padding: 60px 0;">
+          <svg style="color: #4CAF50; margin-bottom: 20px;" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <h3 style="color: #fff; font-size: 2rem; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;">Transmission Received.</h3>
+          <p style="color: #aaa; font-size: 1.1rem;">Your article is securely uploaded and pending clearance.</p>
         </div>
       </div>
     </div>
@@ -216,15 +248,13 @@
   <script type="module" src="/src/script.js"></script>
 
   <script>
-    // ==========================================
-    // INJECTED ACTUAL SUPABASE KEYS
-    // ==========================================
     const SUPABASE_URL = 'https://nfztdpyygfrpbjbhidxe.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5menRkcHl5Z2ZycGJqYmhpZHhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1MzcxOTEsImV4cCI6MjA4NzExMzE5MX0.Ydo6vduICdQwBrygEN1e5JswVVaATLChNLtq7whqf7I';
     
     const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     
     let globalArticles = [];
+    const baseTitle = "Updates | XELTIS LTD";
 
     // Fetch articles
     async function loadArticles() {
@@ -232,7 +262,7 @@
         .from('news_articles')
         .select('*')
         .eq('status', 'published')
-        .eq('category', 'Xeltis') // THIS IS THE SPECIFIC FILTER FOR THIS WEBSITE
+        .eq('category', 'Xeltis')
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -255,15 +285,16 @@
         return;
       }
 
-      container.innerHTML = articlesToRender.map(article => `
-        <div class="dynamic-news-card" onclick="openArticle('${article.id}')">
-          ${article.image_url ? `<img src="${article.image_url}" alt="Cover">` : ''}
-          <div>
-            <span class="tag">XELTIS INTELLIGENCE</span>
-          </div>
+      container.innerHTML = articlesToRender.map((article, index) => `
+        <div class="dynamic-news-card ${index === 0 ? 'latest-highlight' : ''}" onclick="openArticle('${article.id}')">
+          ${article.image_url ? `<img src="${article.image_url}" alt="${article.title}">` : ''}
+          <div><span class="tag">XELTIS INTELLIGENCE</span></div>
           <h3>${article.title}</h3>
           <p>${article.content.replace(/<[^>]*>?/gm, '')}</p>
-          <div class="date">${new Date(article.created_at).toLocaleDateString()}</div>
+          <div class="date">
+            <span>${new Date(article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
         </div>
       `).join('');
     }
@@ -278,7 +309,6 @@
       renderGrid(filtered);
     });
 
-    // Modal Control
     function openSubmitModal() {
       document.getElementById('submitModal').classList.add('active');
     }
@@ -287,30 +317,75 @@
       document.getElementById('articleModal').classList.remove('active');
       document.getElementById('submitModal').classList.remove('active');
       
-      // Clean URL if reading an article
+      // Revert Page Meta & URL
+      document.getElementById('pageTitle').innerText = baseTitle;
+      document.getElementById('metaOgTitle').content = baseTitle;
       const url = new URL(window.location);
       url.searchParams.delete('article');
       window.history.replaceState({}, '', url);
+    }
+
+    // Share Link Function
+    function shareArticleLink() {
+      const urlToShare = window.location.href;
+      navigator.clipboard.writeText(urlToShare).then(() => {
+        const btn = document.getElementById('shareBtn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+        btn.style.color = "#4CAF50";
+        btn.style.borderColor = "#4CAF50";
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.color = "";
+          btn.style.borderColor = "";
+        }, 2000);
+      });
     }
 
     function openArticle(id) {
       const article = globalArticles.find(a => a.id === id);
       if(!article) return;
 
+      // Update Meta Tags dynamically for active reading
+      document.getElementById('pageTitle').innerText = `${article.title} | XELTIS`;
+      document.getElementById('metaOgTitle').content = `${article.title} | XELTIS`;
+
       const modalContent = document.getElementById('articleModalContent');
       modalContent.innerHTML = `
-        ${article.image_url ? `<img src="${article.image_url}" class="article-modal-img">` : ''}
+        ${article.image_url ? `
+        <div class="article-modal-header">
+          <img src="${article.image_url}" alt="Cover Image">
+        </div>` : '<div style="height: 60px;"></div>'}
+        
         <div class="article-modal-body">
-          <div style="color: #888; font-size: 0.9rem;">
-            <span style="color: #FFC107; font-weight:bold; margin-right: 15px;">XELTIS INTELLIGENCE</span>
-            ${new Date(article.created_at).toLocaleDateString()}
+          <div class="article-meta-row">
+            <div class="article-meta-info">
+              <span style="color: #FFC107; font-weight:bold; letter-spacing: 1px; font-size: 0.8rem; text-transform: uppercase;">XELTIS INTELLIGENCE</span>
+              <span>•</span>
+              <span>${new Date(article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            </div>
+            
+            <button id="shareBtn" class="share-btn" onclick="shareArticleLink()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              Share Link
+            </button>
           </div>
+          
           <h2 class="article-modal-title">${article.title}</h2>
-          <div class="article-modal-content">${article.content}</div>
+          
+          <div class="article-modal-content">
+            ${article.content}
+          </div>
           
           ${article.tags && article.tags.length > 0 ? `
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-              ${article.tags.map(t => `<span style="background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color:#ccc; margin-right: 10px;">#${t}</span>`).join('')}
+            <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; gap: 10px;">
+              ${article.tags.map(t => `<span style="background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color:#aaa; border: 1px solid rgba(255,255,255,0.1);">#${t}</span>`).join('')}
             </div>
           ` : ''}
         </div>
@@ -342,12 +417,11 @@
       const title = document.getElementById('formTitle').value;
       const contentRaw = document.getElementById('formContent').value;
       const tagsRaw = document.getElementById('formTags').value;
-      const category = document.getElementById('formCategory').value; // Forced 'Xeltis'
+      const category = document.getElementById('formCategory').value;
       const imageFile = document.getElementById('formImage').files[0];
 
       let imageUrl = null;
 
-      // 1. Upload Image
       if (imageFile) {
         const fileExt = imageFile.name.split('.').pop();
         const fileName = `${Math.random()}.${fileExt}`;
@@ -361,24 +435,22 @@
         }
       }
 
-      // 2. Format Data
       const tagsArray = tagsRaw.split(',').map(t => t.trim()).filter(t => t !== '');
-      const formattedContent = `<p>${contentRaw.replace(/\\n/g, '<br/>')}</p>`;
+      const formattedContent = `<p>${contentRaw.replace(/\n/g, '<br/>')}</p>`;
 
-      // 3. Insert Row
       const { error } = await client.from('news_articles').insert([{
         title: title,
         content: formattedContent,
         category: category,
         tags: tagsArray,
         image_url: imageUrl,
-        status: 'pending' // Sends it to review queue just like IFB
+        status: 'pending'
       }]);
 
       if (error) {
         alert("Upload failed. Please check console.");
         console.error(error);
-        btn.innerText = "Submit for Review";
+        btn.innerText = "Submit for Clearance";
         btn.disabled = false;
       } else {
         document.getElementById('newsForm').style.display = 'none';
@@ -390,13 +462,12 @@
           document.getElementById('newsForm').style.display = 'block';
           document.getElementById('successMessage').style.display = 'none';
           document.getElementById('fileNameDisplay').innerText = 'Click or drop a high-quality image file here';
-          btn.innerText = "Submit for Review";
+          btn.innerText = "Submit for Clearance";
           btn.disabled = false;
         }, 3000);
       }
     }
 
-    // Init Page Data
     window.addEventListener('DOMContentLoaded', loadArticles);
 
   </script>
