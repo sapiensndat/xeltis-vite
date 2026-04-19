@@ -23,7 +23,7 @@
     .projects span a:hover { text-decoration: none; }
     
     .featured-article { grid-column: 1 / -1; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,193,7,0.3); border-radius: 20px; padding: 50px; text-align: left; margin-bottom: 40px; }
-    .featured-article img.article-hero { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
+    .featured-article img.article-hero { width: 100%; height: 400px; object-fit: cover; object-position: top center; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
     .featured-article h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; color: #FFC107; margin-bottom: 10px; line-height: 1.2; }
     .featured-article h3 { font-size: 1.2rem; color: #fff; margin-bottom: 20px; font-weight: 400; letter-spacing: 1px; }
     .featured-article .article-meta { font-size: 0.9rem; color: #888; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
@@ -50,7 +50,8 @@
     .dynamic-news-card.latest-highlight { grid-column: span 2; }
     @media (max-width: 768px) { .dynamic-news-card.latest-highlight { grid-column: span 1; } }
 
-    .dynamic-news-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
+    /* FIXED: Added object-position: top center; to card images */
+    .dynamic-news-card img { width: 100%; height: 220px; object-fit: cover; object-position: top center; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
     .dynamic-news-card.latest-highlight img { height: 300px; }
     .dynamic-news-card .tag { font-size: 0.75rem; background: rgba(255,193,7,0.1); color: #FFC107; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(255,193,7,0.2); letter-spacing: 1px; text-transform: uppercase; }
     .dynamic-news-card h3 { color: #fff; font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif; line-height: 1.3; transition: color 0.2s; }
@@ -70,7 +71,10 @@
     
     /* View Article Modal Specifics - Cinematic Look */
     .article-modal-header { position: relative; width: 100%; height: 450px; background: #111; }
-    .article-modal-header img { width: 100%; height: 100%; object-fit: cover; border-top-left-radius: 24px; border-top-right-radius: 24px; }
+    
+    /* FIXED: Added object-position: top center; to the modal image */
+    .article-modal-header img { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-top-left-radius: 24px; border-top-right-radius: 24px; }
+    
     .article-modal-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.8) 40%, transparent 100%); pointer-events: none; }
     
     .article-modal-body { padding: 0 50px 50px 50px; position: relative; z-index: 2; margin-top: -60px; }
