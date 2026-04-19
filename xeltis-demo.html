@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XELTIS | Earth Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald-400: #34d399;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --black-trans: rgba(10, 10, 10, 0.85);
+    --gray-800: #1f2937;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; }
+  body { background: #000; overflow: hidden; color: white; }
+
+  /* PRELOADER FOR THE MAP (Prevents the black screen) */
+  #map-preloader {
+    position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Super_Pit_mine%2C_Kalgoorlie%2C_Western_Australia.jpg/1920px-Super_Pit_mine%2C_Kalgoorlie%2C_Western_Australia.jpg');
+  }
+
+  /* =========================================
+     SCENE 2: THE TARGET MAP (Starts in background)
+  ========================================= */
+  #scene-target {
+    position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 2s ease;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Super_Pit_mine%2C_Kalgoorlie%2C_Western_Australia.jpg/1920px-Super_Pit_mine%2C_Kalgoorlie%2C_Western_Australia.jpg') center/cover;
+  }
+
+  /* =========================================
+     SCENE 1: REAL SPACE & ORBIT
+  ========================================= */
+  #scene-space {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; justify-content: center; align-items: center;
+  }
+  
+  .stars {
+    position: absolute; inset: 0; z-index: 1;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Milky_Way_Night_Sky_Black_Forest.jpg/1920px-Milky_Way_Night_Sky_Black_Forest.jpg') center/cover;
+    opacity: 0.5; transition: opacity 1.5s ease;
+  }
+
+  .earth-container { 
+    position: relative; width: 450px; height: 450px; z-index: 2; 
+    transition: transform 3s cubic-bezier(0.65, 0, 0.35, 1); 
+  }
+  
+  /* Photorealistic NASA Earth */
+  .earth {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%28remastered%29.jpg/1024px-The_Blue_Marble_%28remastered%29.jpg') center/cover;
+    box-shadow: inset -40px -20px 80px rgba(0,0,0,0.9), 0 0 60px rgba(59, 130, 246, 0.3);
+    animation: rotateEarth 40s linear infinite;
+    transition: opacity 2.5s ease; /* Allows smooth fade out during zoom */
+  }
+  @keyframes rotateEarth { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* =========================================
+     THE SATELLITES (Always Visible layer)
+  ========================================= */
+  #satellite-layer {
+    position: absolute; inset: 0; z-index: 100; pointer-events: none;
+  }
+
+  .orbit {
+    position: absolute; top: 50%; left: 50%; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15); transform: translate(-50%, -50%);
+    transition: border-color 0.5s ease;
+  }
+  .orbit-1 { width: 600px; height: 600px; animation: spin 12s linear infinite; }
+  .orbit-2 { width: 750px; height: 750px; animation: spin 16s linear infinite reverse; }
+  .orbit-3 { width: 900px; height: 900px; animation: spin 20s linear infinite; }
+
+  @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  /* Real ESA Sentinel PNG */
+  .satellite-img {
+    position: absolute; top: -30px; left: 50%; margin-left: -30px;
+    width: 60px; height: 60px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Sentinel-2_satellite.png/320px-Sentinel-2_satellite.png') center/contain no-repeat;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
+    transition: all 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* Xeltis Button UI */
+  .btn-scan {
+    position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+    background: var(--emerald-600); color: white; border: 1px solid var(--emerald-500);
+    padding: 16px 32px; font-weight: 900; font-size: 14px; text-transform: uppercase;
+    letter-spacing: 2px; border-radius: 8px; cursor: pointer; z-index: 200; pointer-events: auto;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transition: 0.3s; display: flex; align-items: center; gap: 10px;
+  }
+  .btn-scan:hover { background: var(--emerald-500); box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
+
+  /* =========================================
+     UI OVERLAYS (Target Map)
+  ========================================= */
+  .global-scanner-line {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(16,185,129,0) 0%, rgba(16,185,129,0.2) 50%, rgba(16,185,129,0) 100%);
+    background-size: 100% 20%; background-repeat: no-repeat;
+    animation: scan-sweep 3s infinite linear; pointer-events: none; z-index: 6; display: none;
+  }
+  @keyframes scan-sweep { 0% { background-position: 0 -100%; } 100% { background-position: 0 500%; } }
+
+  .radar-grid-overlay {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90vh; height: 90vh; border-radius: 50%;
+    border: 1px solid rgba(16,185,129,0.3); box-shadow: 0 0 100px rgba(16,185,129,0.1) inset;
+    animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); pointer-events: none; z-index: 6; display: none;
+  }
+  @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
+
+  /* Header matched to React code */
+  .top-header {
+    position: absolute; top: 20px; left: 20px; right: 20px;
+    display: flex; justify-content: space-between; z-index: 20; opacity: 0; transition: opacity 1s ease;
+  }
+  .search-bar {
+    background: var(--black-trans); backdrop-filter: blur(10px);
+    border: 1px solid var(--gray-800); padding: 12px 20px; border-radius: 10px;
+    font-family: 'JetBrains Mono'; font-size: 12px; color: white; display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  /* Target Map Blip */
+  .target-blip {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; opacity: 0;
+  }
+  .target-blip.show { opacity: 1; animation: mapPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+  .blip-core { width: 14px; height: 14px; border-radius: 50%; background: var(--emerald-500); border: 2px solid white; box-shadow: 0 0 15px var(--emerald-500); z-index: 2; }
+  .blip-pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--emerald-500); animation: radarPulse 2s infinite; z-index: 1; }
+  @keyframes mapPop { 0% { transform: translate(-50%, -50%) scale(0); } 70% { transform: translate(-50%, -50%) scale(1.3); } 100% { transform: translate(-50%, -50%) scale(1); } }
+  @keyframes radarPulse { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+  /* AI Terminal */
+  .terminal-box {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    background: var(--black-trans); backdrop-filter: blur(20px);
+    border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 20px; width: 600px;
+    box-shadow: 0 0 50px rgba(16,185,129,0.1); z-index: 20; opacity: 0; transition: 0.5s;
+  }
+  .terminal-box.show { opacity: 1; }
+  .term-header {
+    color: var(--emerald-500); font-weight: 900; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 2px; border-bottom: 1px solid var(--gray-800); padding-bottom: 10px; margin-bottom: 10px;
+  }
+  .term-content { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #d1d5db; line-height: 1.8; }
+  .term-line { display: flex; opacity: 0; animation: fadeIn 0.1s forwards; margin-bottom: 4px; }
+  .term-icon { color: var(--emerald-500); margin-right: 10px; font-weight: bold; }
+  .blinking-cursor { display: inline-block; width: 6px; height: 12px; background: var(--emerald-500); animation: blink 1s step-end infinite; }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* Data Modals */
+  .data-modal {
+    position: absolute; background: var(--black-trans); backdrop-filter: blur(20px);
+    border: 1px solid var(--gray-800); border-radius: 16px; padding: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8); opacity: 0; z-index: 30;
+  }
+  
+  .modal-left { top: 50%; left: 40px; transform: translateY(-50%) translateX(-50px); width: 320px; transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .modal-left.show { opacity: 1; transform: translateY(-50%) translateX(0); }
+  
+  .modal-right { bottom: 40px; right: 40px; width: 380px; transform: translateY(50px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s; border: 1px solid rgba(16,185,129,0.4); }
+  .modal-right.show { opacity: 1; transform: translateY(0); }
+
+  .data-title { font-size: 10px; color: #9ca3af; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; margin-bottom: 5px; display: block; }
+  .data-value { font-size: 24px; font-weight: 900; color: white; display: block; margin-bottom: 15px; }
+  .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--gray-800); font-size: 11px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+  <div id="map-preloader"></div>
+
+  <div id="scene-target">
+    <div class="global-scanner-line" id="scan-line"></div>
+    <div class="radar-grid-overlay" id="radar-ring"></div>
+  </div>
+
+  <div id="scene-space">
+    <div class="stars" id="stars"></div>
+    <div class="earth-container" id="earth-container">
+      <div class="earth" id="earth"></div>
+    </div>
+  </div>
+
+  <div id="satellite-layer">
+    <div class="orbit orbit-1" id="orb-1"><div class="satellite-img" id="sat-1"></div></div>
+    <div class="orbit orbit-2" id="orb-2"><div class="satellite-img" id="sat-2"></div></div>
+    <div class="orbit orbit-3" id="orb-3"><div class="satellite-img" id="sat-3"></div></div>
+  </div>
+
+  <button class="btn-scan" id="btn-scan">INITIATE EARTH SCAN</button>
+
+  <div class="top-header" id="top-header">
+    <div class="search-bar">
+      <span style="color:var(--emerald-500); font-weight:900; font-size:16px;">⌖</span>
+      <span>TARGET: 30.7747° S, 121.5094° E (KALGOORLIE)</span>
+    </div>
+    <div class="search-bar" style="background:var(--emerald-600); border:none; color:black; font-weight:900;">
+      LIVE SENSORS ACTIVE
+    </div>
+  </div>
+
+  <div class="target-blip" id="target-blip">
+    <div class="blip-pulse"></div>
+    <div class="blip-core"></div>
+  </div>
+
+  <div class="terminal-box" id="terminal-box">
+    <div class="term-header">Data Collection in Progress</div>
+    <div class="term-content" id="term-content"></div>
+  </div>
+
+  <div class="data-modal modal-left" id="modal-left">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+      <span style="font-weight:900; font-size:16px;">XELTIS-ID: AU-882</span>
+      <span style="background:rgba(168,85,247,0.2); color:#a855f7; padding:4px 8px; border-radius:4px; font-size:10px; font-weight:900;">AI SCORE: 98%</span>
+    </div>
+    <span class="data-title">Target Classification</span>
+    <span class="data-value">Super Pit Gold Mine</span>
+    <span class="data-title">Est. Contained Mass</span>
+    <span class="data-value" style="color:#a855f7;">14,200,000 OZ</span>
+    <div class="stat-row"><span style="color:#9ca3af; text-transform:uppercase;">Spectral Match</span><span style="font-family:'JetBrains Mono'; color:var(--emerald-400)">High (Iron-Oxide)</span></div>
+    <div class="stat-row"><span style="color:#9ca3af; text-transform:uppercase;">Depth Extent</span><span style="font-family:'JetBrains Mono'; color:white">600m+</span></div>
+    <div class="stat-row"><span style="color:#9ca3af; text-transform:uppercase;">Status</span><span style="font-family:'JetBrains Mono'; color:#ef4444">ACTIVE</span></div>
+  </div>
+
+  <div class="data-modal modal-right" id="modal-right">
+    <h3 style="font-weight:900; font-size:14px; text-transform:uppercase; color:var(--emerald-500); margin-bottom:15px; border-bottom:1px solid var(--gray-800); padding-bottom:10px;">Executive Summary</h3>
+    <span class="data-title">Est. Project Value</span>
+    <span class="data-value" style="color:var(--emerald-400);">$32,500,000,000 USD</span>
+    <p style="font-family:'JetBrains Mono'; font-size:11px; color:#9ca3af; line-height:1.6; margin-bottom:20px;">
+      Massive hydrothermal gold deposit confirmed. AI Consensus indicates high probability of deep structural lineament extensions. Target exceeds institutional benchmark parameters.
+    </p>
+    <button style="width:100%; background:var(--emerald-600); color:white; border:none; padding:12px; border-radius:8px; font-weight:900; font-family:'Space Grotesk'; cursor:pointer;">
+      GENERATE PRE-JORC REPORT
+    </button>
+  </div>
+
+  <script>
+    const btnScan = document.getElementById('btn-scan');
+    const sceneSpace = document.getElementById('scene-space');
+    const earthContainer = document.getElementById('earth-container');
+    const earth = document.getElementById('earth');
+    const stars = document.getElementById('stars');
+    const sceneTarget = document.getElementById('scene-target');
+    
+    const orbits = document.querySelectorAll('.orbit');
+    const sat1 = document.getElementById('sat-1');
+    const sat2 = document.getElementById('sat-2');
+    const sat3 = document.getElementById('sat-3');
+
+    const topHeader = document.getElementById('top-header');
+    const terminalBox = document.getElementById('terminal-box');
+    const termContent = document.getElementById('term-content');
+    const targetBlip = document.getElementById('target-blip');
+    const modalLeft = document.getElementById('modal-left');
+    const modalRight = document.getElementById('modal-right');
+    const scanLine = document.getElementById('scan-line');
+    const radarRing = document.getElementById('radar-ring');
+
+    const scanSteps = [
+      "Connecting to Sentinel-2 Multispectral Array...",
+      "Targeting coordinates: 30.7747° S, 121.5094° E...",
+      "Analyzing deep geophysics and structural fault lines...",
+      "Detecting massive hydrothermal alteration footprint...",
+      "Cross-referencing Global Mining Cadastre for tenure...",
+      "Estimating volumetric containment and project value...",
+      "Generating final institutional data summary..."
+    ];
+
+    btnScan.addEventListener('click', () => {
+      // 1. Hide Button
+      btnScan.style.opacity = '0';
+      btnScan.style.pointerEvents = 'none';
+
+      // 2. Stop orbits and move satellites to hover over the center
+      orbits.forEach(orbit => {
+        orbit.style.animationPlayState = 'paused';
+        orbit.style.borderColor = 'transparent';
+      });
+
+      // Fly the real satellites into the center, hovering over the target
+      sat1.style.top = '30%'; sat1.style.left = '45%'; sat1.style.transform = 'scale(1.5) rotate(45deg)';
+      sat2.style.top = '60%'; sat2.style.left = '35%'; sat2.style.transform = 'scale(1.5) rotate(120deg)';
+      sat3.style.top = '50%'; sat3.style.left = '65%'; sat3.style.transform = 'scale(1.5) rotate(-30deg)';
+
+      // 3. Camera Zooms into Earth
+      setTimeout(() => {
+        earthContainer.style.transform = 'scale(40)'; // Drastic zoom
+        earth.style.opacity = '0'; // Fade earth out smoothly to reveal the map behind it
+        stars.style.opacity = '0'; // Fade out stars
+        sceneTarget.style.opacity = '1'; // Fade in the actual land map seamlessly
+      }, 500);
+
+      // 4. Transition completed, start UI
+      setTimeout(() => {
+        sceneSpace.style.display = 'none'; // Clean up
+        
+        // Turn on scanning lasers
+        scanLine.style.display = 'block';
+        radarRing.style.display = 'block';
+        
+        // Show headers and start terminal
+        topHeader.style.opacity = '1';
+        runScanSequence();
+      }, 3000);
+    });
+
+    function runScanSequence() {
+      terminalBox.classList.add('show');
+      let stepIndex = 0;
+
+      function typeStep() {
+        if (stepIndex >= scanSteps.length) {
+          // Finished scanning: Hide terminal, show modals
+          setTimeout(() => {
+            terminalBox.classList.remove('show');
+            targetBlip.classList.add('show');
+            modalLeft.classList.add('show');
+            modalRight.classList.add('show');
+            
+            // Satellites back out slightly, lasers turn off
+            scanLine.style.display = 'none';
+            radarRing.style.display = 'none';
+            sat1.style.transform = 'scale(1) rotate(45deg)';
+            sat2.style.transform = 'scale(1) rotate(120deg)';
+            sat3.style.transform = 'scale(1) rotate(-30deg)';
+          }, 1500);
+          return;
+        }
+
+        // Handle previous line checkmark
+        const oldLines = document.querySelectorAll('.term-line');
+        if (oldLines.length > 0) {
+          oldLines[oldLines.length - 1].querySelector('.term-icon').innerText = '✓';
+          oldLines[oldLines.length - 1].style.color = '#9ca3af'; 
+        }
+
+        // New line with ChatGPT blinking cursor
+        const line = document.createElement('div');
+        line.className = 'term-line';
+        line.innerHTML = `
+          <span class="term-icon">></span>
+          <span style="color:white;">${scanSteps[stepIndex]}</span>
+          <span class="blinking-cursor"></span>
+        `;
+        termContent.appendChild(line);
+        termContent.scrollTop = termContent.scrollHeight;
+
+        // Remove old cursor
+        if (oldLines.length > 0) {
+          const oldCursor = oldLines[oldLines.length - 1].querySelector('.blinking-cursor');
+          if (oldCursor) oldCursor.remove();
+        }
+
+        stepIndex++;
+        setTimeout(typeStep, 1000 + Math.random() * 800);
+      }
+
+      setTimeout(typeStep, 1000);
+    }
+  </script>
+</body>
+</html>

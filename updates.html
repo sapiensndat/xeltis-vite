@@ -10,17 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Roboto:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
-    .projects span a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .projects span a:hover {
-      text-decoration: none;
-    }
-    /* Featured Article Styles */
+    /* Existing Styles */
+    .projects span a { color: inherit; text-decoration: none; }
+    .projects span a:hover { text-decoration: none; }
+    
     .featured-article {
-      grid-column: 1 / -1; /* Spans full width of the grid */
+      grid-column: 1 / -1;
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,193,7,0.3);
       border-radius: 20px;
@@ -28,68 +27,57 @@
       text-align: left;
       margin-bottom: 40px;
     }
-    .featured-article img.article-hero {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .featured-article h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.5rem;
-      color: #FFC107;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-    .featured-article h3 {
-      font-size: 1.2rem;
-      color: #fff;
-      margin-bottom: 20px;
-      font-weight: 400;
-      letter-spacing: 1px;
-    }
-    .featured-article .article-meta {
-      font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 20px;
-    }
-    .featured-article h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      color: #FFC107;
-      margin-top: 40px;
-      margin-bottom: 15px;
-    }
-    .featured-article p {
-      font-size: 1.05rem;
-      color: #ccc;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-    .featured-article ul {
-      color: #ccc;
-      margin-left: 20px;
-      margin-bottom: 30px;
-      line-height: 1.8;
-      font-size: 1.05rem;
-    }
-    .featured-article ul li {
-      margin-bottom: 8px;
-    }
-    .featured-article a {
-      color: #FFC107;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-    .featured-article a:hover {
-      text-decoration: underline;
-      color: #fff;
-    }
+    .featured-article img.article-hero { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
+    .featured-article h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; color: #FFC107; margin-bottom: 10px; line-height: 1.2; }
+    .featured-article h3 { font-size: 1.2rem; color: #fff; margin-bottom: 20px; font-weight: 400; letter-spacing: 1px; }
+    .featured-article .article-meta { font-size: 0.9rem; color: #888; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+    .featured-article h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #FFC107; margin-top: 40px; margin-bottom: 15px; }
+    .featured-article p, .featured-article ul { font-size: 1.05rem; color: #ccc; line-height: 1.8; margin-bottom: 20px; }
+    .featured-article ul { margin-left: 20px; margin-bottom: 30px; }
+    .featured-article ul li { margin-bottom: 8px; }
+    .featured-article a { color: #FFC107; text-decoration: none; font-weight: bold; transition: 0.2s; }
+    .featured-article a:hover { text-decoration: underline; color: #fff; }
+
+    /* New Dynamic News Styles */
+    .news-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px; flex-wrap: wrap; }
+    .news-search { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; outline: none; }
+    .news-search:focus { border-color: #FFC107; }
+    .btn-submit-news { background: #FFC107; color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
+    .btn-submit-news:hover { background: #fff; transform: translateY(-2px); }
+
+    .dynamic-news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
+    .dynamic-news-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 25px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
+    .dynamic-news-card:hover { border-color: #FFC107; transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+    .dynamic-news-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+    .dynamic-news-card .tag { font-size: 0.75rem; background: rgba(255,193,7,0.1); color: #FFC107; padding: 5px 10px; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(255,193,7,0.3); }
+    .dynamic-news-card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif; }
+    .dynamic-news-card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .dynamic-news-card .date { color: #666; font-size: 0.85rem; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
+
+    /* Modals */
+    .xeltis-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 9999; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+    .xeltis-modal.active { display: flex; opacity: 1; }
+    .modal-content { background: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
+    .modal-close:hover { background: #FFC107; color: #000; }
+    
+    /* View Article Modal Specifics */
+    .article-modal-img { width: 100%; height: 350px; object-fit: cover; }
+    .article-modal-body { padding: 40px; }
+    .article-modal-title { font-size: 2.5rem; color: #FFC107; font-family: 'Space Grotesk', sans-serif; margin: 15px 0 25px 0; }
+    .article-modal-content { color: #ccc; line-height: 1.8; font-size: 1.1rem; }
+
+    /* Form Specifics */
+    .form-container { padding: 40px; }
+    .form-container h2 { color: #FFC107; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 10px; }
+    .form-container p { color: #888; margin-bottom: 30px; }
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; color: #ccc; margin-bottom: 10px; font-weight: bold; font-size: 0.9rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
+    .form-group input:focus, .form-group textarea:focus { border-color: #FFC107; outline: none; }
+    .file-drop { border: 2px dashed rgba(255,255,255,0.2); padding: 30px; text-align: center; border-radius: 10px; cursor: pointer; color: #888; transition: 0.2s; position: relative; }
+    .file-drop:hover { border-color: #FFC107; color: #fff; }
+    .file-drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   </style>
 </head>
 <body class="updates-page">
@@ -107,87 +95,24 @@
         <span data-project="drc"><a href="/drc.html">DRC</a></span>
       </div>
       <div class="header-right">
-        <div class="search-container">
-          <input type="text" class="search-input" placeholder="" aria-label="Search">
-          <span class="search-placeholder">explore</span>
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <div class="suggestions"></div>
-        </div>
         <button class="discover-btn">DISCOVER</button>
         <div class="burger-menu">
-          <div class="burger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <div class="burger-icon"><span></span><span></span><span></span></div>
           <nav class="menu">
             <ul>
-              <li>
-                <a href="/mission.html" data-preview="mission">
-                  Mission
-                  <div class="menu-preview">
-                    <img src="/images/menu-mission.jpg" alt="Mission Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Explore our cosmic mission to revolutionize mining.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/launches.html" data-preview="launches">
-                  Launches
-                  <div class="menu-preview">
-                    <img src="/images/menu-launches.jpg" alt="Launches Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Witness our stellar launches into the future.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/career.html" data-preview="career">
-                  Career
-                  <div class="menu-preview">
-                    <img src="/images/menu-career.jpg" alt="Career Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Join our team to explore new frontiers.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/updates.html" data-preview="updates">
-                  Updates
-                  <div class="menu-preview">
-                    <img src="/images/menu-updates.jpg" alt="Updates Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Stay updated with our cosmic journey.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="/discover.html" data-preview="discover">
-                  Discover
-                  <div class="menu-preview">
-                    <img src="/images/menu-discover.jpg" alt="Discover Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Discover the universe with XELTIS.</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="https://app.xeltis.org/login.html" data-preview="profile">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <img src="/images/login.png" alt="Profile" style="width:32px;height:32px;border-radius:50%;" onerror="this.src='/images/fallback-office.jpg'">
-                    <span>Profile</span>
-                  </div>
-                  <div class="menu-preview">
-                    <img src="/images/login.png" alt="Profile Preview" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-                    <p>Access your account, settings, and saved projects.</p>
-                  </div>
-                </a>
-              </li>
+              <li><a href="/mission.html">Mission</a></li>
+              <li><a href="/launches.html">Launches</a></li>
+              <li><a href="/career.html">Career</a></li>
+              <li><a href="/updates.html">Updates</a></li>
+              <li><a href="/discover.html">Discover</a></li>
+              <li><a href="https://app.xeltis.org/login.html">Profile</a></li>
             </ul>
           </nav>
         </div>
       </div>
     </div>
   </header>
+
   <section class="hero">
     <div class="hero-content">
       <h1 class="hero-question">Stay Informed with XELTIS Updates</h1>
@@ -199,132 +124,281 @@
   </section>
 
   <section class="updates" style="max-width: 1200px; margin: 0 auto; padding: 50px 20px;">
+    
     <div class="updates-list">
-      
       <div class="update-item featured-article">
         <img class="article-hero" src="/images/mining-indaba.jpeg" alt="Mining Indaba 2026" loading="lazy" onerror="this.src='/images/hero-fallback.jpg'">
-        
         <h2>Xeltis Named Among Top 10 Champions at Mining Indaba 2026</h2>
         <h3>A New Era of Earth Intelligence for Responsible Mining</h3>
         <div class="article-meta">Published on March 16, 2026 | Global Communications | <a href="https://miningindaba.com/" target="_blank">Mining Indaba</a></div>
-
-        <p>The global mining industry is entering a transformative era—one where technology, sustainability, and community engagement must evolve together. Against this backdrop, <a href="https://xeltis.org">Xeltis</a> has been recognized as one of the <strong>Top 10 Champions at Investing in African Mining Indaba 2026</strong>, marking a significant milestone for the platform and its founder Sapiens Ndatabaye.</p>
-        
-        <p>The recognition comes through the <strong>Community Voices initiative</strong>, a program delivered in partnership with <a href="https://theimpactfacility.com/" target="_blank">The Impact Facility</a>, designed to highlight leaders who are shaping the future of mining through innovation, community engagement, and sustainable development.</p>
-        
-        <p>This selection places Xeltis among a new generation of initiatives pushing the mining sector toward responsible resource development, transparency, and technological transformation.</p>
-
-        <h4>Mining Indaba: The Global Platform for Mining Leadership</h4>
-        <p>For more than three decades, Investing in African Mining Indaba has been one of the most influential gatherings in the global mining sector. Held annually in Cape Town, the event brings together:</p>
-        <ul>
-          <li>Mining executives</li>
-          <li>Global investors</li>
-          <li>Government bodies and policymakers</li>
-          <li>Development institutions</li>
-          <li>Technology innovators</li>
-        </ul>
-        <p>The 2026 edition was particularly significant. Under the theme <em>“Stronger Together: Progress Through Partnerships,”</em> the event hosted over 12,000 delegates, including mining companies, investors, policymakers, and African ministers. Discussions throughout the conference centered on securing critical mineral supply chains, improving ESG standards, strengthening community partnerships, and advancing digital transformation in mining.</p>
-        <p>At a moment when Africa’s mineral wealth is becoming central to global supply chains for energy transition technologies, Mining Indaba has emerged as a strategic meeting point for the world’s mining decision-makers.</p>
-
-        <h4>The Community Voices Initiative</h4>
-        <p>One of the most important developments at the 2026 event was the expansion of the Community Voices program. Through this initiative, Mining Indaba and the Impact Facility selected ten leaders and innovators whose work demonstrates how communities, technology, and industry can collaborate to shape the future of mining.</p>
-        <p>Unlike traditional industry awards focused purely on financial success, the Community Voices platform aims to highlight individuals who:</p>
-        <ul>
-          <li>Promote responsible mining practices</li>
-          <li>Strengthen community participation</li>
-          <li>Introduce innovative approaches to resource governance</li>
-          <li>Build bridges between technology and sustainable development</li>
-        </ul>
-        <p>By doubling the number of winners compared with previous years, the organizers sent a clear message: Communities and innovation must sit at the center of mining’s future. As Mining Indaba leadership noted, community engagement is no longer a compliance exercise—it is a strategic investment for the long-term success of the sector.</p>
-
-        <h4>Xeltis: Technology for the Next Generation of Mining</h4>
-        <p>Among the selected champions was <strong>Sapiens Ndatabaye</strong>, Founder and Chief Engineering Officer of Xeltis. Xeltis is an Earth Intelligence platform designed to transform how governments, mining companies, and investors understand the planet’s resources and risks.</p>
-        <p>Through advanced geospatial analytics, AI, and satellite data, Xeltis provides decision-makers with real-time insights across multiple domains:</p>
-        <ul>
-          <li><strong>Mineral Exploration Intelligence:</strong> AI-powered geological analysis and satellite data processing support mineral targeting and exploration planning.</li>
-          <li><strong>Environmental Monitoring:</strong> Real-time analysis of land use, carbon impact, and ecosystem changes supports responsible mining practices.</li>
-          <li><strong>Infrastructure Analysis:</strong> Mapping and monitoring of logistics networks help identify risks affecting mining operations and regional development.</li>
-          <li><strong>Disaster Risk Assessment:</strong> Rapid assessment tools support governments and companies in responding to environmental events affecting mining regions.</li>
-          <li><strong>Operational Analytics:</strong> Deep oversight for active mining sites.</li>
-        </ul>
-        <p>During the program, Ndatabaye highlighted Africa’s strategic role in the global minerals economy, emphasizing that the continent will be essential to ensuring equitable access to the resources underpinning modern industries. He also stressed that the responsibility of managing these resources must be shared between governments, companies, and communities.</p>
-
-        <h4>Looking Ahead: From Recognition to Deployment</h4>
-        <p>For Xeltis, the recognition at Mining Indaba represents an important step—but also the beginning of a broader journey. As demand for critical minerals continues to grow and digital technologies reshape the industry, platforms like Xeltis will play an increasingly important role in helping stakeholders make informed decisions.</p>
-        <p>The next phase for the company focuses on expanding partnerships with mining companies seeking advanced exploration intelligence, governments responsible for resource governance, infrastructure planners managing mining corridors, and sustainability teams monitoring environmental impact.</p>
-        <p>By integrating data from satellites, AI analytics, and operational telemetry, Xeltis aims to create a new standard for transparent and intelligent resource management.</p>
-
+        <p>The global mining industry is entering a transformative era...</p>
         <div style="margin-top: 40px; padding: 30px; background: rgba(255,193,7,0.05); border-radius: 10px; border: 1px solid rgba(255,193,7,0.2);">
           <h4 style="margin-top: 0;">About Xeltis</h4>
-          <p style="margin-bottom: 0;">Xeltis is an Earth Intelligence Platform designed to help organizations understand the planet’s resources, risks, and infrastructure in real time. By combining satellite data, AI analytics, and geospatial intelligence, the platform enables governments, companies, and institutions to make faster and more informed decisions about mining, infrastructure, environmental monitoring, and disaster response. <a href="https://app.xeltis.org" target="_blank">Access the Platform &rarr;</a></p>
+          <p style="margin-bottom: 0;">Xeltis is an Earth Intelligence Platform... <a href="https://app.xeltis.org" target="_blank">Access the Platform &rarr;</a></p>
         </div>
       </div>
-
-      <div class="update-item">
-        <img src="/images/update1.jpg" alt="Update 1" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-        <div class="update-text">
-          <h3>New Partnership in South Kivu</h3>
-          <p>Announcing our latest collaboration with local partners to support sustainable mining initiatives in South Kivu.</p>
-          <div class="update-meta">Posted on May 1, 2025 at 10:00 AM by XELTIS Team</div>
-        </div>
-      </div>
-      <div class="update-item">
-        <img src="/images/update2.jpg" alt="Update 2" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-        <div class="update-text">
-          <h3>NOVA7 Update 2025</h3>
-          <p>Enhanced features for our AI-powered mineral mapping platform, improving accuracy to 99%.</p>
-          <div class="update-meta">Posted on April 15, 2025 at 2:00 PM by Tech Division</div>
-        </div>
-      </div>
-      <div class="update-item">
-        <img src="/images/update3.jpg" alt="Update 3" loading="lazy" onerror="this.src='/images/fallback-office.jpg'">
-        <div class="update-text">
-          <h3>Successful Lunar Mapping Mission</h3>
-          <p>Our team successfully mapped lunar resources, identifying new deposits for future extraction.</p>
-          <div class="update-meta">Posted on March 20, 2025 at 9:00 AM by Exploration Team</div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="news-controls">
+      <input type="text" id="searchInput" class="news-search" placeholder="Search XELTIS intelligence reports or #hashtags...">
+      <button onclick="openSubmitModal()" class="btn-submit-news">+ Submit Update</button>
+    </div>
+
+    <div id="dynamicNewsContainer" class="dynamic-news-grid">
+      <p style="color: #888; text-align: center; grid-column: 1/-1; padding: 40px;">Initializing uplink... fetching latest records.</p>
+    </div>
+
   </section>
+
+  <div id="articleModal" class="xeltis-modal" onclick="closeModals()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModals()">×</button>
+      <div id="articleModalContent">
+        </div>
+    </div>
+  </div>
+
+  <div id="submitModal" class="xeltis-modal" onclick="closeModals()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModals()">×</button>
+      <div class="form-container">
+        <h2>Transmit an Update</h2>
+        <p>Submit intelligence reports for the Xeltis Platform. Submissions enter a pending review state.</p>
+        
+        <form id="newsForm" onsubmit="handleNewsSubmit(event)">
+          <input type="hidden" id="formCategory" value="Xeltis">
+          
+          <div class="form-group">
+            <label>Transmission Title</label>
+            <input type="text" id="formTitle" required placeholder="Enter an engaging title...">
+          </div>
+
+          <div class="form-group">
+            <label>Tags (Comma separated)</label>
+            <input type="text" id="formTags" placeholder="Geospatial, AI, Orbit...">
+          </div>
+
+          <div class="form-group">
+            <label>Cover Telemetry (Image)</label>
+            <div class="file-drop">
+              <span id="fileNameDisplay">Click or drop a high-quality image file here</span>
+              <input type="file" id="formImage" accept="image/*" onchange="document.getElementById('fileNameDisplay').innerText = this.files[0] ? this.files[0].name : 'Click or drop a high-quality image file here'">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Transmission Data (Content)</label>
+            <textarea id="formContent" rows="8" required placeholder="Write your full report here. Paragraph breaks will be preserved..."></textarea>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn-submit-news" style="width: 100%;">Submit for Review</button>
+        </form>
+        
+        <div id="successMessage" style="display: none; text-align: center; padding: 40px 0;">
+          <h3 style="color: #4CAF50; font-size: 2rem; margin-bottom: 10px;">Transmission Received.</h3>
+          <p style="color: #aaa;">Your article is securely uploaded and pending clearance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="signup-footer" id="signup">
     <div class="signup-content">
       <p>Stay updated with the latest from XELTIS</p>
-      <form class="signup-form" aria-label="Sign Up Form">
-        <input type="email" placeholder="Enter your email" aria-label="Email Address" required>
+      <form class="signup-form">
+        <input type="email" placeholder="Enter your email" required>
         <button type="submit">Sign Up</button>
       </form>
       <p class="signup-info">By signing up, you agree to our <a href="/terms.html">Terms</a> and <a href="/ip.html">Privacy Policy</a>.</p>
     </div>
-    <nav class="footer-links" aria-label="Footer Navigation">
-      <a href="/terms.html">Terms</a>
-      <a href="/ip.html">Privacy</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
   </footer>
 
-  <div class="chatbot">
-    <div class="chatbot-btn">
-      <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z" stroke="#FFC107"/>
-        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 16c2 0 3-1 3-2s-1-2-3-2-3 1-3 2 1 2 3 2z" fill="#FFC107"/>
-      </svg>
-    </div>
-    <div class="chatbot-window">
-      <div class="chatbot-header">
-        <h4>XELTIS Assistant</h4>
-        <button class="chatbot-close">×</button>
-      </div>
-      <div class="chatbot-messages">
-        <div class="message bot fancy-message">Greetings, Explorer! Ready to unearth the secrets of the cosmos with XELTIS?</div>
-      </div>
-      <div class="chatbot-input">
-        <input type="text" placeholder="Type your message...">
-        <button>Send</button>
-      </div>
-    </div>
-  </div>
   <script type="module" src="/src/script.js"></script>
+
+  <script>
+    // ==========================================
+    // ⚠️ IMPORTANT: ADD YOUR SUPABASE KEYS HERE
+    // ==========================================
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    let globalArticles = [];
+
+    // Fetch articles
+    async function loadArticles() {
+      const { data, error } = await client
+        .from('news_articles')
+        .select('*')
+        .eq('status', 'published')
+        .eq('category', 'Xeltis') // THIS IS THE SPECIFIC FILTER FOR THIS WEBSITE
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('dynamicNewsContainer').innerHTML = `<p style="color:red;">Error syncing with database.</p>`;
+        return;
+      }
+
+      globalArticles = data || [];
+      renderGrid(globalArticles);
+      checkUrlForArticle();
+    }
+
+    // Render Grid
+    function renderGrid(articlesToRender) {
+      const container = document.getElementById('dynamicNewsContainer');
+      
+      if (articlesToRender.length === 0) {
+        container.innerHTML = `<p style="color:#888; grid-column:1/-1; text-align:center;">No recent intelligence reports found.</p>`;
+        return;
+      }
+
+      container.innerHTML = articlesToRender.map(article => `
+        <div class="dynamic-news-card" onclick="openArticle('${article.id}')">
+          ${article.image_url ? `<img src="${article.image_url}" alt="Cover">` : ''}
+          <div>
+            <span class="tag">XELTIS INTELLIGENCE</span>
+          </div>
+          <h3>${article.title}</h3>
+          <p>${article.content.replace(/<[^>]*>?/gm, '')}</p>
+          <div class="date">${new Date(article.created_at).toLocaleDateString()}</div>
+        </div>
+      `).join('');
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = globalArticles.filter(a => 
+        a.title.toLowerCase().includes(term) || 
+        (a.tags && a.tags.some(tag => tag.toLowerCase().includes(term)))
+      );
+      renderGrid(filtered);
+    });
+
+    // Modal Control
+    function openSubmitModal() {
+      document.getElementById('submitModal').classList.add('active');
+    }
+
+    function closeModals() {
+      document.getElementById('articleModal').classList.remove('active');
+      document.getElementById('submitModal').classList.remove('active');
+      
+      // Clean URL if reading an article
+      const url = new URL(window.location);
+      url.searchParams.delete('article');
+      window.history.replaceState({}, '', url);
+    }
+
+    function openArticle(id) {
+      const article = globalArticles.find(a => a.id === id);
+      if(!article) return;
+
+      const modalContent = document.getElementById('articleModalContent');
+      modalContent.innerHTML = `
+        ${article.image_url ? `<img src="${article.image_url}" class="article-modal-img">` : ''}
+        <div class="article-modal-body">
+          <div style="color: #888; font-size: 0.9rem;">
+            <span style="color: #FFC107; font-weight:bold; margin-right: 15px;">XELTIS INTELLIGENCE</span>
+            ${new Date(article.created_at).toLocaleDateString()}
+          </div>
+          <h2 class="article-modal-title">${article.title}</h2>
+          <div class="article-modal-content">${article.content}</div>
+          
+          ${article.tags && article.tags.length > 0 ? `
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+              ${article.tags.map(t => `<span style="background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color:#ccc; margin-right: 10px;">#${t}</span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+      
+      document.getElementById('articleModal').classList.add('active');
+
+      // Update URL silently
+      const url = new URL(window.location);
+      url.searchParams.set('article', id);
+      window.history.replaceState({}, '', url);
+    }
+
+    function checkUrlForArticle() {
+      const params = new URLSearchParams(window.location.search);
+      const articleId = params.get('article');
+      if (articleId) {
+        openArticle(articleId);
+      }
+    }
+
+    // Handle Form Submission
+    async function handleNewsSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.innerText = "Uploading to Orbit...";
+      btn.disabled = true;
+
+      const title = document.getElementById('formTitle').value;
+      const contentRaw = document.getElementById('formContent').value;
+      const tagsRaw = document.getElementById('formTags').value;
+      const category = document.getElementById('formCategory').value; // Forced 'Xeltis'
+      const imageFile = document.getElementById('formImage').files[0];
+
+      let imageUrl = null;
+
+      // 1. Upload Image
+      if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const { error: uploadError } = await client.storage
+          .from('news_images')
+          .upload(`public/${fileName}`, imageFile);
+
+        if (!uploadError) {
+          const { data } = client.storage.from('news_images').getPublicUrl(`public/${fileName}`);
+          imageUrl = data.publicUrl;
+        }
+      }
+
+      // 2. Format Data
+      const tagsArray = tagsRaw.split(',').map(t => t.trim()).filter(t => t !== '');
+      const formattedContent = `<p>${contentRaw.replace(/\\n/g, '<br/>')}</p>`;
+
+      // 3. Insert Row
+      const { error } = await client.from('news_articles').insert([{
+        title: title,
+        content: formattedContent,
+        category: category,
+        tags: tagsArray,
+        image_url: imageUrl,
+        status: 'pending' // Sends it to review queue just like IFB
+      }]);
+
+      if (error) {
+        alert("Upload failed. Please check console.");
+        console.error(error);
+        btn.innerText = "Submit for Review";
+        btn.disabled = false;
+      } else {
+        document.getElementById('newsForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        
+        setTimeout(() => {
+          closeModals();
+          document.getElementById('newsForm').reset();
+          document.getElementById('newsForm').style.display = 'block';
+          document.getElementById('successMessage').style.display = 'none';
+          document.getElementById('fileNameDisplay').innerText = 'Click or drop a high-quality image file here';
+          btn.innerText = "Submit for Review";
+          btn.disabled = false;
+        }, 3000);
+      }
+    }
+
+    // Init Page Data
+    window.addEventListener('DOMContentLoaded', loadArticles);
+
+  </script>
 </body>
 </html>
